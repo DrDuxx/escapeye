@@ -18,7 +18,7 @@ const AdminLayout = ({ backLink,backLinkDepth, children }) => {
           <BackIcon width={20} height={20} fill="red" />
         </div>
       )}
-      <div style={{ position: "absolute", bottom: 0, right: 0 }}>
+      <div style={{ position: "fixed", bottom: 0, right: 0 }}>
         <img src={FunLocLogo} alt="" />
       </div>
       {children}

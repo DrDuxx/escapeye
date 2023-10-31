@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       hint: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       solution: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       roomId: {

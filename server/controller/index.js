@@ -236,6 +236,33 @@ module.exports = {
       next(error);
     }
   },
+  getAdminScoreBoard: async (req, res, next) => {
+    try {
+      const { Match } = require("../models");
+      const { roomId } = req.params;
+      const scores = await Match.findAll({ where: { roomId },raw: true });
+      const sortedScores = scores
+        .map((zone)=>({...zone,rawTime: moment(zone?.finishedAt).diff(zone?.startedAt, "seconds")}))
+        .sort((a, b) => (a.score < b.score ? -1 : 1))
+        .sort((a, b) => (a.rawTime < b.rawTime ? -1 : 1));
+      const sortedScoresWithRank = sortedScores.map((zone, i) => ({
+        score: zone?.score,
+        numberOfPlayers: zone?.numberOfPlayers,
+        date: zone?.createdAt,
+        rawTime: moment(zone?.finishedAt).diff(zone?.startedAt, "seconds"),
+        hintsUsed: zone?.hintsUsed?.length,
+        solutionsUsed: zone?.solutionsUsed?.length,
+        teamName: zone?.teamName,
+        escaped: zone?.escaped,
+        rank: i + 1,
+      }));
+      return res
+        .status(200)
+        .json(sortedScoresWithRank);
+    } catch (error) {
+      next(error);
+    }
+  },
   getDashboardData: async (req, res, next) => {
     try {
     } catch (error) {

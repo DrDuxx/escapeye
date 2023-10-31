@@ -33,6 +33,7 @@ module.exports = (app) => {
   const DashboardRouter = require("express").Router();
   DashboardRouter.get("/", asyncWrapper(controller.getDashboardData));
   DashboardRouter.get("/scoreboard/:roomId", asyncWrapper(controller.getScoreBoard));
+  DashboardRouter.get("/admin/scoreboard/:roomId", asyncWrapper(controller.getAdminScoreBoard));
   DashboardRouter.get("/monitor/:roomNumber", asyncWrapper(controller.getMonitorData));
   
   const ConfigRouter = require("express").Router();

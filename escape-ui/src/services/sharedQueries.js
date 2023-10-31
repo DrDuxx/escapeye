@@ -24,6 +24,7 @@ export const EDIT_GAME = "EDIT_GAME"
 export const ADMIN_GET_MONITOR = "ADMIN_GET_MONITOR"
 export const ADMIN_CHANGE_STATUS = "ADMIN_CHANGE_STATUS"
 export const GET_SCOREBOARD = "GET_SCOREBOARD"
+export const GET_ADMIN_SCOREBOARD = "GET_ADMIN_SCOREBOARD"
 
 
 
@@ -84,6 +85,10 @@ queryClient.setQueryDefaults(GET_HINT, {
 
 queryClient.setQueryDefaults(GET_SCOREBOARD, {
   queryFn: api.getScoreBoard,
+});
+
+queryClient.setQueryDefaults(GET_ADMIN_SCOREBOARD, {
+  queryFn: api.getAdminScoreBoard,
 });
 
 queryClient.setMutationDefaults(EDIT_HINT, {

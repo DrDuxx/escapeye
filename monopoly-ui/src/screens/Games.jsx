@@ -5,7 +5,7 @@ const Games = () => {
   const { data: roomsData } = useQuery(GET_ROOMS);
 
   return (
-    <div>{roomsData.map(()=>{
+    <div>{roomsData?.map(()=>{
       return <div>Hello</div>
     })}</div>
   )

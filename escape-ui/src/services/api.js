@@ -2,6 +2,17 @@ import getAxiosInstance from "./axios";
 const connection = getAxiosInstance();
 
 export const api = {
+  getAdminScoreBoard: async ({ queryKey }) => {
+    try {
+      const { roomId } = queryKey[1];
+      const { data } = await connection.get(
+        `/dashboard/admin/scoreboard/${roomId}`
+      );
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
   getScoreBoard: async ({ queryKey }) => {
     try {
       const { roomId, gameId } = queryKey[1];

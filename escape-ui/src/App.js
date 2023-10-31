@@ -18,6 +18,7 @@ import Room from "./screens/Room";
 import AdminHints from "./screens/AdminHints";
 import AdminHint from "./screens/AdminHint";
 import AdminAddHint from "./screens/AdminAddHint";
+import Game from "./screens/Game";
 
 const App = () => {
   const roomNumber = localStorage.getItem('roomNumber') 
@@ -49,8 +50,8 @@ const App = () => {
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout><Dashboard /></AdminLayout>} />
         <Route path="/admin/monitor" element={<AdminLayout backLink={"/admin"}><Monitor /></AdminLayout>} />
-        <Route path="/admin/games" element={<AdminLayout><Games /></AdminLayout>} />
-        {/* <Route path="/admin/games/:gameId" element={<Dashboard />} /> */}
+        <Route path="/admin/games" element={<AdminLayout backLink={"/admin"}><Games /></AdminLayout>} />
+        <Route path="/admin/games/:roomId" element={<AdminLayout backLink={"/admin/games"}><Game /></AdminLayout>} />
         <Route path="/admin/rooms" element={<AdminLayout backLink={"/admin"}><Rooms /></AdminLayout>} />
         <Route path="/admin/rooms/edit/:roomId" element={<AdminLayout backLink={"/admin/rooms"}><Room /></AdminLayout>} />
         <Route path="/admin/rooms/edit/:roomId/hints" element={<AdminLayout backLinkDepth={1}><AdminHints /></AdminLayout>} />
