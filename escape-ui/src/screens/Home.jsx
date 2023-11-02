@@ -31,10 +31,10 @@ const Home = () => {
         margin: "2rem 0",
       }}
     >
-      <div style={{ fontSize: "4rem", fontWeight: "700", backgroundColor:'rgba(0,0,0,.4)', padding:'1rem', color:'white', borderRadius:'.5rem' }}>
+      <div style={{ fontSize: "4rem", fontWeight: "700",  padding:'1rem', color:'white', borderRadius:'.5rem' }}>
         {roomData?.name}
       </div>
-      <div style={{backgroundColor:'rgba(0,0,0,.4)', padding:'1rem', color:'white', borderRadius:'.5rem',fontSize: "18px", fontWeight: "700", textAlign:'center', whiteSpace:'pre-line' }}>{roomData?.description}</div>
+      <div style={{ padding:'1rem', color:'white', borderRadius:'.5rem',fontSize: "18px", fontWeight: "700", textAlign:'center', whiteSpace:'pre-line' }}>{roomData?.description}</div>
       <div>
         <Button
           onClick={async () => {

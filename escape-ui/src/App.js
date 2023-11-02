@@ -33,8 +33,8 @@ const App = () => {
     }
   }, [roomNumber, localServerIp, location.pathname])
   
-  return (
-    
+  return (<>
+    <div style={{position:'absolute', top:0,left:0,right:0,bottom:0, backgroundColor:'rgba(0,0,0,.4)', zIndex:'-1'}}></div>
       <Routes>
         {/* Game Routes */}
         <Route path="/" element={ (localStorage.getItem('roomId') && localStorage.getItem('localServerIp')) ? <Navigate to="/home"/> : <Navigate to="/warning"/>} />
@@ -57,7 +57,7 @@ const App = () => {
         <Route path="/admin/rooms/edit/:roomId/hints" element={<AdminLayout backLinkDepth={1}><AdminHints /></AdminLayout>} />
         <Route path="/admin/rooms/edit/:roomId/hints/add/:nextNumber" element={<AdminLayout backLinkDepth={2}><AdminAddHint /></AdminLayout>} />
         <Route path="/admin/rooms/edit/:roomId/hints/edit/:hintId" element={<AdminLayout backLinkDepth={2}><AdminHint /></AdminLayout>} />
-      </Routes>
+      </Routes></>
   );
 };
 
