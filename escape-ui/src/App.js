@@ -27,7 +27,7 @@ const App = () => {
 
   useEffect(() => {
     if(localServerIp && roomNumber && !location.pathname.includes('admin')){
-      document.body.style=`background-image:url("http://${localStorage.getItem('localServerIp')}:8080/images/room${roomNumber}.jpg");`;
+      document.body.style=`background-image:url("http://${localStorage.getItem('localServerIp')}:8080/images/room${roomNumber}.jpeg");background-size:contain;`;
     }else{      
       document.body.style="background-color:#700B83;height:100vh;";
     }
