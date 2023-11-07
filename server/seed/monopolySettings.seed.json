@@ -1,0 +1,67 @@
+[
+    {
+        "option_name": "starting_amount",
+        "option_value": {
+            "data": 2000
+        }
+    },
+    {
+        "option_name": "trivia_questions",
+        "option_value": {
+            "data": 5
+        }
+    },
+    {
+        "option_name": "trivia_question_answered_amount",
+        "option_value": {
+            "data": 50
+        }
+    },
+    {
+        "option_name": "bosta_fee",
+        "option_value": {
+            "data": 100
+        }
+    },
+    {
+        "option_name": "daman_fee",
+        "option_value": {
+            "data": 100
+        }
+    },
+    {
+        "option_name": "baalback_fee",
+        "option_value": {
+            "data": 100
+        }
+    },
+    {
+        "option_name": "go_bonus",
+        "option_value": {
+            "data": 200
+        }
+    },
+    {
+        "option_name": "colors",
+        "option_value": {
+            "data": {
+                "#FF0000": 2,
+                "#00FF00": 3,
+                "#0000FF": 2,
+                "#00FFFF": 2,
+                "#FF00FF": 2,
+                "#F0F0FF": 2,
+                "edl": 1,
+                "jail": 1
+            }
+        }
+    },
+    {
+        "option_name": "locations",
+        "option_value": {
+            "data": [
+                "Jounieh"
+            ]
+        }
+    }
+]

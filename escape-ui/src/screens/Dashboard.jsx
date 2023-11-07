@@ -38,6 +38,14 @@ const Dashboard = () => {
         >
           Games
         </Button>
+        <Button
+          width={"400px"}
+          onClick={() => {
+            navigate("/admin/monopoly");
+          }}
+        >
+          Monopoly
+        </Button>
       </div>
     </div>
   );

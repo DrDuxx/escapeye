@@ -26,6 +26,24 @@ export const ADMIN_CHANGE_STATUS = "ADMIN_CHANGE_STATUS"
 export const GET_SCOREBOARD = "GET_SCOREBOARD"
 export const GET_ADMIN_SCOREBOARD = "GET_ADMIN_SCOREBOARD"
 
+export const GET_MONOPOLY_SETTINGS = "GET_MONOPOLY_SETTINGS"
+export const EDIT_MONOPOLY_SETTINGS = "EDIT_MONOPOLY_SETTINGS"
+export const EDIT_MONOPOLY_FEES = "EDIT_MONOPOLY_FEES"
+export const EDIT_MONOPOLY_COLOR = "EDIT_MONOPOLY_COLOR"
+export const EDIT_MONOPOLY_LOCATIONS = "EDIT_MONOPOLY_LOCATIONS"
+
+export const GET_MONOPOLY_CHANCES = "GET_MONOPOLY_CHANCES"
+export const GET_MONOPOLY_CHANCE = "GET_MONOPOLY_CHANCE"
+export const ADD_MONOPOLY_CHANCE = "ADD_MONOPOLY_CHANCE"
+export const EDIT_MONOPOLY_CHANCE = "EDIT_MONOPOLY_CHANCE"
+export const DELETE_MONOPOLY_CHANCE = "DELETE_MONOPOLY_CHANCE"
+
+export const GET_MONOPOLY_TRIVIAS = "GET_MONOPOLY_TRIVIAS"
+export const GET_MONOPOLY_TRIVIA = "GET_MONOPOLY_TRIVIA"
+export const ADD_MONOPOLY_TRIVIA = "ADD_MONOPOLY_TRIVIA"
+export const EDIT_MONOPOLY_TRIVIA = "EDIT_MONOPOLY_TRIVIA"
+export const DELETE_MONOPOLY_TRIVIA = "DELETE_MONOPOLY_TRIVIA"
+
 
 
 queryClient.setQueryDefaults(GET_ROOM_BY_ROOM_NUMBER, {
@@ -101,4 +119,58 @@ queryClient.setMutationDefaults(ADD_HINT, {
 
 queryClient.setMutationDefaults(DELETE_HINT, {
   mutationFn: api.deleteHint,
+});
+
+queryClient.setQueryDefaults(GET_MONOPOLY_SETTINGS, {
+  queryFn: api.getMonopolySettings,
+});
+
+queryClient.setMutationDefaults(EDIT_MONOPOLY_SETTINGS, {
+  mutationFn: api.editMonopolySettings,
+});
+
+queryClient.setMutationDefaults(EDIT_MONOPOLY_FEES, {
+  mutationFn: api.editMonopolyFees,
+});
+
+queryClient.setMutationDefaults(EDIT_MONOPOLY_COLOR, {
+  mutationFn: api.editMonopolyColors,
+});
+
+queryClient.setMutationDefaults(EDIT_MONOPOLY_LOCATIONS, {
+  mutationFn: api.editMonopolyLocations,
+});
+
+
+queryClient.setQueryDefaults(GET_MONOPOLY_CHANCES, {
+  queryFn: api.getMonopolyChances,
+});
+queryClient.setQueryDefaults(GET_MONOPOLY_CHANCE, {
+  queryFn: api.getMonopolyChance,
+});
+queryClient.setMutationDefaults(ADD_MONOPOLY_CHANCE, {
+  mutationFn: api.addMonopolyChance,
+});
+queryClient.setMutationDefaults(EDIT_MONOPOLY_CHANCE, {
+  mutationFn: api.editMonopolyChance,
+});
+queryClient.setMutationDefaults(DELETE_MONOPOLY_CHANCE, {
+  mutationFn: api.deleteMonopolyChance,
+});
+
+
+queryClient.setQueryDefaults(GET_MONOPOLY_TRIVIAS, {
+  queryFn: api.getMonopolyTrivias,
+});
+queryClient.setQueryDefaults(GET_MONOPOLY_TRIVIA, {
+  queryFn: api.getMonopolyTrivia,
+});
+queryClient.setMutationDefaults(ADD_MONOPOLY_TRIVIA, {
+  mutationFn: api.addMonopolyTrivia,
+});
+queryClient.setMutationDefaults(EDIT_MONOPOLY_TRIVIA, {
+  mutationFn: api.editMonopolyTrivia,
+});
+queryClient.setMutationDefaults(DELETE_MONOPOLY_TRIVIA, {
+  mutationFn: api.deleteMonopolyTrivia,
 });

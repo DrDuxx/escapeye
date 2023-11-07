@@ -9,7 +9,6 @@ const CountdownProvider = ({ minutes, children }) => {
     if (timeLeft > 0) {
       interval = setInterval(() => {
         setTimeLeft((prevTime) => {
-          localStorage.setItem("timeLeft", prevTime - 1);
           return prevTime - 1;
         });
       }, 1000);

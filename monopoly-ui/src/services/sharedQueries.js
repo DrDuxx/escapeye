@@ -4,96 +4,108 @@ import getQueryClient from "./queryClient";
 
 const queryClient = getQueryClient();
 
-export const GET_ROOMS = "GET_ROOMS";
-export const GET_ROOM_BY_ROOM_NUMBER = "GET_ROOM_BY_ROOM_NUMBER"; 
-export const GET_ROOM_DETAILS = "GET_ROOM_DETAILS";
-export const GET_ROOM_LOCKS = "GET_ROOM_LOCKS";
-export const EDIT_ROOM = "EDIT_ROOM";
+export const GET_GAME = "GET_GAME";
+export const GENERATE_GAME = "GENERATE_GAME"; 
+export const GENERATE_TRANSACTION = "GENERATE_TRANSACTION"; 
+export const SET_BOSTA_MODE = "SET_BOSTA_MODE"; 
+export const ASSIGN_COLOR = "ASSIGN_COLOR"; 
+export const EXCHANGE_COLOR = "EXCHANGE_COLOR"; 
+export const EXTEND_TIME = "EXTEND_TIME"; 
+export const STOP_GAME = "STOP_GAME"; 
+export const UPDATE_WINNER = "UPDATE_WINNER"; 
+export const MORTAGE_COLOR = "MORTAGE_COLOR"; 
+export const UNMORTAGE_COLOR = "UNMORTAGE_COLOR"; 
+export const USE_CHANCE = "USE_CHANCE"; 
+export const GET_CHANCE = "GET_CHANCE"; 
+export const DISMISS_CHANCE = "DISMISS_CHANCE"; 
+export const USE_TRIVIA = "USE_TRIVIA";
+export const GET_TRIVIA = "GET_TRIVIA";
+export const ANSWER_TRIVIA = "ANSWER_TRIVIA";
+export const DISMISS_TRIVIA = "DISMISS_TRIVIA";
+export const NEXT_TRIVIA = "NEXT_TRIVIA";
+export const GENERATE_TRIVIA_SESSION = "GENERATE_TRIVIA_SESSION";
+export const SET_TRIVIA_CATEGORY_MODE = "SET_TRIVIA_CATEGORY_MODE";
 
-export const GET_GAMES = "GET_GAMES" // TODO:
-export const GET_GAME_DETAILS = "GET_GAME_DETAILS"
-export const ADD_GAME = "ADD_GAME"
-export const USE_HINT = "USE_HINT"
-export const USE_SOLUTION = "USE_SOLUTION"
-export const GET_HINT = "GET_HINT"
-export const EDIT_HINT = "EDIT_HINT"
-export const ADD_HINT = "ADD_HINT"
-export const DELETE_HINT = "DELETE_HINT"
-export const EDIT_GAME = "EDIT_GAME"
-
-export const ADMIN_GET_MONITOR = "ADMIN_GET_MONITOR"
-export const ADMIN_CHANGE_STATUS = "ADMIN_CHANGE_STATUS"
-export const GET_SCOREBOARD = "GET_SCOREBOARD"
-
-
-
-queryClient.setQueryDefaults(GET_ROOM_BY_ROOM_NUMBER, {
-  queryFn: api.getRoomByRoomNumber,
+queryClient.setQueryDefaults(GET_GAME, {
+  queryFn: api.getGame,
 });
 
-queryClient.setQueryDefaults(GET_ROOM_DETAILS, {
-  queryFn: api.getRoomDetails,
-});
-
-queryClient.setQueryDefaults(GET_ROOM_LOCKS, {
-  queryFn: api.getRoomLocks,
-});
-
-
-
-queryClient.setMutationDefaults(ADD_GAME,{
-  mutationFn: api.addGame,
+queryClient.setMutationDefaults(GENERATE_GAME,{
+  mutationFn: api.generateGame,
 })
 
-queryClient.setQueryDefaults(GET_GAME_DETAILS, {
-  queryFn: api.getGameDetails,
-});
-
-queryClient.setMutationDefaults(USE_HINT,{
-  mutationFn: api.useHint,
+queryClient.setMutationDefaults(GENERATE_TRANSACTION,{
+  mutationFn: api.generateTransaction,
 })
 
-queryClient.setMutationDefaults(USE_SOLUTION,{
-  mutationFn: api.useSolution,
+queryClient.setMutationDefaults(ASSIGN_COLOR,{
+  mutationFn: api.assignColor,
 })
 
+queryClient.setMutationDefaults(EXCHANGE_COLOR,{
+  mutationFn: api.exchangeColor,
+})
 
-queryClient.setQueryDefaults(ADMIN_GET_MONITOR, {
-  queryFn: api.getAdminMonitor,
+queryClient.setMutationDefaults(EXTEND_TIME,{
+  mutationFn: api.extendTime,
+})
+
+queryClient.setMutationDefaults(STOP_GAME,{
+  mutationFn: api.stopGame,
+})
+
+queryClient.setMutationDefaults(MORTAGE_COLOR,{
+  mutationFn: api.mortageColor,
+})
+
+queryClient.setMutationDefaults(UNMORTAGE_COLOR,{
+  mutationFn: api.unmortageColor,
+})
+
+queryClient.setQueryDefaults(USE_CHANCE, {
+  queryFn: api.useChance,
 });
 
-queryClient.setMutationDefaults(ADMIN_CHANGE_STATUS, {
-  mutationFn: api.changeStatus,
+queryClient.setQueryDefaults(GET_CHANCE, {
+  queryFn: api.getChance,
 });
 
-queryClient.setMutationDefaults(EDIT_GAME, {
-  mutationFn: api.editGame,
+queryClient.setMutationDefaults(DISMISS_CHANCE,{
+  mutationFn: api.dismissChance,
+})
+
+queryClient.setQueryDefaults(USE_TRIVIA, {
+  queryFn: api.useTrivia,
 });
 
-queryClient.setMutationDefaults(EDIT_ROOM, {
-  mutationFn: api.editRoom,
+queryClient.setQueryDefaults(GET_TRIVIA, {
+  queryFn: api.getTrivia,
 });
 
-queryClient.setQueryDefaults(GET_ROOMS, {
-  queryFn: api.getRooms,
-});
+queryClient.setMutationDefaults(ANSWER_TRIVIA,{
+  mutationFn: api.answerTrivia,
+})
 
-queryClient.setQueryDefaults(GET_HINT, {
-  queryFn: api.getHint,
-});
+queryClient.setMutationDefaults(DISMISS_TRIVIA,{
+  mutationFn: api.dismissTrivia,
+})
 
-queryClient.setQueryDefaults(GET_SCOREBOARD, {
-  queryFn: api.getScoreBoard,
-});
+queryClient.setMutationDefaults(NEXT_TRIVIA,{
+  mutationFn: api.nextTrivia,
+})
 
-queryClient.setMutationDefaults(EDIT_HINT, {
-  mutationFn: api.editHint,
-});
+queryClient.setMutationDefaults(GENERATE_TRIVIA_SESSION,{
+  mutationFn: api.generateTriviaSession,
+})
 
-queryClient.setMutationDefaults(ADD_HINT, {
-  mutationFn: api.addHint,
-});
+queryClient.setMutationDefaults(SET_TRIVIA_CATEGORY_MODE,{
+  mutationFn: api.setTriviaCategoryMode,
+})
 
-queryClient.setMutationDefaults(DELETE_HINT, {
-  mutationFn: api.deleteHint,
-});
+queryClient.setMutationDefaults(UPDATE_WINNER,{
+  mutationFn: api.updateWinner,
+})
+
+queryClient.setMutationDefaults(SET_BOSTA_MODE,{
+  mutationFn: api.setBostaMode,
+})

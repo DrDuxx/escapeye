@@ -169,4 +169,127 @@ export const api = {
       throw error;
     }
   },
+  getMonopolySettings: async () => {
+    try {
+      const { data } = await connection.get(`/monopoly/setting`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  editMonopolySettings: async (editData) => {
+    try {
+      const { data } = await connection.put(`/monopoly/setting`, editData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  editMonopolyFees: async (editData) => {
+    try {
+      const { data } = await connection.put(`/monopoly/setting/fees`, editData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  editMonopolyColors: async (editData) => {
+    try {
+      const { data } = await connection.put(`/monopoly/setting/colors`, {colors:editData});
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  editMonopolyLocations: async (editData) => {
+    try {
+      const { data } = await connection.put(`/monopoly/setting/locations`, {locations:editData});
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  
+  getMonopolyChances: async () => {
+    try {
+      const { data } = await connection.get(`/monopoly/setting/chance`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getMonopolyChance: async ({queryKey}) => {
+    try {
+      const { chanceId } = queryKey[1];
+      const { data } = await connection.get(`/monopoly/setting/chance/${chanceId}`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  addMonopolyChance: async (addData) => {
+    try {
+      const { data } = await connection.post(`/monopoly/setting/chance`, addData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  editMonopolyChance: async ({chanceId, editData}) => {
+    try {
+      const { data } = await connection.put(`/monopoly/setting/chance/${chanceId}`, editData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  deleteMonopolyChance: async ({chanceId}) => {
+    try {
+      const { data } = await connection.delete(`/monopoly/setting/chance/${chanceId}`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getMonopolyTrivias: async () => {
+    try {
+      const { data } = await connection.get(`/monopoly/setting/trivia`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getMonopolyTrivia: async ({queryKey}) => {
+    try {
+      const { triviaId } = queryKey[1];
+      const { data } = await connection.get(`/monopoly/setting/trivia/${triviaId}`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  addMonopolyTrivia: async (addData) => {
+    try {
+      const { data } = await connection.post(`/monopoly/setting/trivia`, addData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  editMonopolyTrivia: async ({triviaId,editData}) => {
+    try {
+      const { data } = await connection.put(`/monopoly/setting/trivia/${triviaId}`, editData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  deleteMonopolyTrivia: async ({triviaId}) => {
+    try {
+      const { data } = await connection.delete(`/monopoly/setting/trivia/${triviaId}`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

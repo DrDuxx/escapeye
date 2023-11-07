@@ -8,7 +8,7 @@ const Button = ({ extraStyle,children,width, ...props }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "white",
+        backgroundColor: "red",
         color:'#000',
         fontWeight:700,
         ...extraStyle

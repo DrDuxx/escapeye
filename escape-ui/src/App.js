@@ -19,6 +19,17 @@ import AdminHints from "./screens/AdminHints";
 import AdminHint from "./screens/AdminHint";
 import AdminAddHint from "./screens/AdminAddHint";
 import Game from "./screens/Game";
+import Monopoly from "./screens/Monopoly";
+import MonopolyChance from "./screens/MonopolyChance";
+import MonopolyTrivia from "./screens/MonopolyTrivia";
+import MonopolyFeesBonus from "./screens/MonopolyFeesBonus";
+import MonopolyColors from "./screens/MonopolyColors";
+import MonopolyLocations from "./screens/MonopolyLocations";
+import MonopolySettings from "./screens/MonopolySettings";
+import MonopolyChanceAdd from "./screens/MonopolyChanceAdd";
+import MonopolyChanceEdit from "./screens/MonopolyChanceEdit";
+import MonopolyTriviaAdd from "./screens/MonopolyTriviaAdd";
+import MonopolyTriviaEdit from "./screens/MonopolyTriviaEdit";
 
 const App = () => {
   const roomNumber = localStorage.getItem('roomNumber') 
@@ -34,7 +45,7 @@ const App = () => {
   }, [roomNumber, localServerIp, location.pathname])
   
   return (<>
-    <div style={{position:'absolute', top:0,left:0,right:0,bottom:0, backgroundColor:'rgba(0,0,0,.4)', zIndex:'-1'}}></div>
+    {/* <div style={{position:'absolute', top:0,left:0,right:0,bottom:0, backgroundColor:'rgba(0,0,0,.4)', zIndex:'-1'}}></div> */}
       <Routes>
         {/* Game Routes */}
         <Route path="/" element={ (localStorage.getItem('roomId') && localStorage.getItem('localServerIp')) ? <Navigate to="/home"/> : <Navigate to="/warning"/>} />
@@ -57,6 +68,25 @@ const App = () => {
         <Route path="/admin/rooms/edit/:roomId/hints" element={<AdminLayout backLinkDepth={1}><AdminHints /></AdminLayout>} />
         <Route path="/admin/rooms/edit/:roomId/hints/add/:nextNumber" element={<AdminLayout backLinkDepth={2}><AdminAddHint /></AdminLayout>} />
         <Route path="/admin/rooms/edit/:roomId/hints/edit/:hintId" element={<AdminLayout backLinkDepth={2}><AdminHint /></AdminLayout>} />
+
+
+        {/* Monopoly Routes */}
+        <Route path="/admin/monopoly" element={<AdminLayout backLink={"/admin"}><Monopoly /></AdminLayout>} />
+        <Route path="/admin/monopoly/chance" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolyChance /></AdminLayout>} />
+        <Route path="/admin/monopoly/trivia" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolyTrivia /></AdminLayout>} />
+        <Route path="/admin/monopoly/fees-and-bonuses" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolyFeesBonus /></AdminLayout>} />
+        <Route path="/admin/monopoly/colors" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolyColors /></AdminLayout>} />
+        <Route path="/admin/monopoly/locations" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolyLocations /></AdminLayout>} />
+        <Route path="/admin/monopoly/settings" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolySettings /></AdminLayout>} />
+        
+        <Route path="/admin/monopoly/chance" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolyChance /></AdminLayout>} />
+        <Route path="/admin/monopoly/chance/add" element={<AdminLayout backLink={"/admin/monopoly/chance"}><MonopolyChanceAdd /></AdminLayout>} />
+        <Route path="/admin/monopoly/chance/edit/:chanceId" element={<AdminLayout backLink={"/admin/monopoly/chance"}><MonopolyChanceEdit /></AdminLayout>} />
+        <Route path="/admin/monopoly/trivia" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolyTrivia /></AdminLayout>} />
+        <Route path="/admin/monopoly/trivia/add" element={<AdminLayout backLink={"/admin/monopoly/trivia"}><MonopolyTriviaAdd /></AdminLayout>} />
+        <Route path="/admin/monopoly/trivia/edit/:triviaId" element={<AdminLayout backLink={"/admin/monopoly/trivia"}><MonopolyTriviaEdit /></AdminLayout>} />
+
+        
       </Routes></>
   );
 };

@@ -1,61 +1,50 @@
-import {  Routes, Route, Navigate, useLocation } from "react-router-dom";
-
-import Home from "./screens/Home";
-import Dashboard from "./screens/Dashboard";
-import Score from "./screens/Score";
-import PreScore from "./screens/PreScore";
-import Hints from "./screens/Hints";
-import Hint from "./screens/Hint";
+import {  Routes, Route } from "react-router-dom";
 import Config from "./screens/Config";
-import Warning from "./screens/Warning";
-import ResetConfig from "./screens/ResetConfig";
-import { useEffect } from "react";
-import Monitor from "./screens/Monitor";
-import Games from "./screens/Games";
-import Rooms from "./screens/Rooms";
-import AdminLayout from "./components/AdminLayout";
-import Room from "./screens/Room";
-import AdminHints from "./screens/AdminHints";
-import AdminHint from "./screens/AdminHint";
-import AdminAddHint from "./screens/AdminAddHint";
+import Ipad from "./screens/Ipad";
+import Home from "./screens/Home";
+import Game from "./screens/Game";
+import PreGame from "./screens/PreGame";
+import PlayerBank from "./screens/PlayerBank";
+import BankPlayer from "./screens/BankPlayer";
+import PlayerPlayer from "./screens/PlayerPlayer";
+import ColorPlayer from "./screens/ColorPlayer";
+import ColorBank from "./screens/ColorBank";
+import Chance from "./screens/Chance";
+import Trivia from "./screens/Trivia";
+import Mortage from "./screens/Mortage";
+import Unmortage from "./screens/Unmortage";
+import ExtendTime from "./screens/ExtendTime";
+import StopGame from "./screens/StopGame";
+import ColorPlayerPlayer from "./screens/ColorPlayerPlayer";
+import Winner from "./screens/Winner";
+import TriviaCategories from "./screens/TriviaCategories";
+import Bosta from "./screens/Bosta";
+
 
 const App = () => {
-  const roomNumber = localStorage.getItem('roomNumber') 
-  const localServerIp = localStorage.getItem('localServerIp') 
-  const location = useLocation();
-
-  useEffect(() => {
-    if(localServerIp && roomNumber && !location.pathname.includes('admin')){
-      document.body.style=`background-image:url("http://${localStorage.getItem('localServerIp')}:8080/images/room${roomNumber}.jpg");`;
-    }else{      
-      document.body.style="background-color:#700B83;height:100vh;";
-    }
-  }, [roomNumber, localServerIp, location.pathname])
-  
   return (
-    
       <Routes>
-        {/* Game Routes */}
-        <Route path="/" element={ (localStorage.getItem('roomId') && localStorage.getItem('localServerIp')) ? <Navigate to="/home"/> : <Navigate to="/warning"/>} />
+        {/* Monopoly Routes */}
+        <Route path="/" element={<Config />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/warning" element={<Warning />} />
-        <Route path="/pre-score" element={<PreScore />} />
-        <Route path="/score" element={<Score />} />
-        <Route path="/hints" element={<Hints />} />
-        <Route path="/hints/:riddleId/:riddleNumber" element={<Hint />} />
-        <Route path="/config/:roomNumber" element={<Config />} />
-        <Route path="/reset-config" element={<ResetConfig />} />
-        
-        {/* Admin Routes */}
-        <Route path="/admin" element={<AdminLayout><Dashboard /></AdminLayout>} />
-        <Route path="/admin/monitor" element={<AdminLayout backLink={"/admin"}><Monitor /></AdminLayout>} />
-        <Route path="/admin/games" element={<AdminLayout><Games /></AdminLayout>} />
-        {/* <Route path="/admin/games/:gameId" element={<Dashboard />} /> */}
-        <Route path="/admin/rooms" element={<AdminLayout backLink={"/admin"}><Rooms /></AdminLayout>} />
-        <Route path="/admin/rooms/edit/:roomId" element={<AdminLayout backLink={"/admin/rooms"}><Room /></AdminLayout>} />
-        <Route path="/admin/rooms/edit/:roomId/hints" element={<AdminLayout backLinkDepth={1}><AdminHints /></AdminLayout>} />
-        <Route path="/admin/rooms/edit/:roomId/hints/add/:nextNumber" element={<AdminLayout backLinkDepth={2}><AdminAddHint /></AdminLayout>} />
-        <Route path="/admin/rooms/edit/:roomId/hints/edit/:hintId" element={<AdminLayout backLinkDepth={2}><AdminHint /></AdminLayout>} />
+        <Route path="/winner/:name" element={<Winner />} />
+        <Route path="/ipad" element={<Ipad />} />
+        <Route path="/pre-game" element={<PreGame />} />
+        <Route path="/game" element={<Game />} />
+        <Route path="/player-bank" element={<PlayerBank />} />
+        <Route path="/bank-player" element={<BankPlayer />} />
+        <Route path="/player-player" element={<PlayerPlayer />} />
+        <Route path="/color-player" element={<ColorPlayer />} />
+        <Route path="/color-player-player" element={<ColorPlayerPlayer />} />
+        <Route path="/color-bank" element={<ColorBank />} />
+        <Route path="/chance" element={<Chance />} />
+        <Route path="/trivia" element={<Trivia />} />
+        <Route path="/trivia/category" element={<TriviaCategories />} />
+        <Route path="/mortage" element={<Mortage />} />
+        <Route path="/unmortage" element={<Unmortage />} />
+        <Route path="/bosta" element={<Bosta />} />
+        <Route path="/extend-time" element={<ExtendTime />} />
+        <Route path="/stop-game" element={<StopGame />} />
       </Routes>
   );
 };

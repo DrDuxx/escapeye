@@ -2,157 +2,213 @@ import getAxiosInstance from "./axios";
 const connection = getAxiosInstance();
 
 export const api = {
-  getScoreBoard: async ({ queryKey }) => {
+  generateGame: async ({ time, players }) => {
     try {
-      const { roomId, gameId } = queryKey[1];
-      const { data } = await connection.get(
-        `/dashboard/scoreboard/${roomId}${gameId ? `?matchId=${gameId}` : ""}`
-      );
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  getRooms: async () => {
-    try {
-      const { data } = await connection.get(`/room`);
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  getRoomByRoomNumber: async ({ queryKey }) => {
-    try {
-      const { roomNumber } = queryKey[1];
-      const { data } = await connection.get(
-        `/config/room-by-number/${roomNumber}`
-      );
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  getRoomDetails: async ({ queryKey }) => {
-    try {
-      const { roomId } = queryKey[1];
-      const { data } = await connection.get(`/room/${roomId}`);
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  addGame: async ({ roomId }) => {
-    try {
-      const { data } = await connection.post(`/match`, { roomId });
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  getGameDetails: async ({ queryKey }) => {
-    try {
-      const { gameId } = queryKey[1];
-      const { data } = await connection.get(`/match/${gameId}`);
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  getRoomLocks: async ({ queryKey }) => {
-    try {
-      const { roomId } = queryKey[1];
-      const { data } = await connection.get(`/room/${roomId}/lock`);
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  getAdminMonitor: async ({ queryKey }) => {
-    try {
-      const { roomNumber } = queryKey[1];
-      const { data } = await connection.get(`/dashboard/monitor/${roomNumber}`);
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  useHint: async ({ gameId, riddleId }) => {
-    try {
-      const { data } = await connection.post(
-        `/match/${gameId}/lock/${riddleId}/hint`
-      );
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  useSolution: async ({ gameId, riddleId }) => {
-    try {
-      const { data } = await connection.post(
-        `/match/${gameId}/lock/${riddleId}/solution`
-      );
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  changeStatus: async ({ gameId, flag }) => {
-    try {
-      const { data } = await connection.post(`/match/${gameId}/status`, {
-        escaped: flag,
+      const { data } = await connection.post(`/monopoly/game`, {
+        time,
+        players,
       });
       return data;
     } catch (error) {
       throw error;
     }
   },
-  editGame: async ({ gameId, teamName, numberOfPlayers }) => {
+  getGame: async () => {
     try {
-      const { data } = await connection.put(`/match/${gameId}`, {
-        teamName,
-        numberOfPlayers,
+      const { data } = await connection.get(`/monopoly/game`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  generateTransaction: async ({ sign, player, amount }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/transaction`, {
+        sign,
+        player,
+        amount,
       });
       return data;
     } catch (error) {
       throw error;
     }
   },
-  editRoom: async ({ roomId, editData }) => {
+  assignColor: async ({ hex, player, direction }) => {
     try {
-      const { data } = await connection.put(`/room/${roomId}`, editData);
+      const { data } = await connection.post(`/monopoly/game/color`, {
+        hex,
+        player,
+        direction,
+      });
       return data;
     } catch (error) {
       throw error;
     }
   },
-  editHint: async ({ hintId, editData }) => {
+  exchangeColor: async ({ hex, fromPlayer, toPlayer }) => {
     try {
-      const { data } = await connection.put(`/lock/${hintId}`, editData);
+      const { data } = await connection.post(`/monopoly/game/color/exchange`, {
+        hex,
+        fromPlayer,
+        toPlayer,
+      });
       return data;
     } catch (error) {
       throw error;
     }
   },
-  addHint: async ({ roomId, addData }) => {
+  extendTime: async ({ time }) => {
     try {
-      const { data } = await connection.post(`room/${roomId}/lock`, addData);
+      const { data } = await connection.put(`/monopoly/game`, { time });
       return data;
     } catch (error) {
       throw error;
     }
   },
-  deleteHint: async ({ hintId }) => {
+  stopGame: async () => {
     try {
-      const { data } = await connection.delete(`lock/${hintId}`);
+      const { data } = await connection.post(`/monopoly/game/stop`);
       return data;
     } catch (error) {
       throw error;
     }
   },
-  getHint: async ({ queryKey }) => {
-    const { hintId } = queryKey[1];
+  mortageColor: async ({ player, hex }) => {
     try {
-      const { data } = await connection.get(`/lock/${hintId}`);
+      const { data } = await connection.post(`/monopoly/game/mortage`, {
+        player,
+        hex,
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  unmortageColor: async ({ player, hex }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/unmortage`, {
+        player,
+        hex,
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getChance: async ({ queryKey }) => {
+    try {
+      const { chanceId } = queryKey[1];
+      const { data } = await connection.get(
+        `/monopoly/setting/chance/${chanceId}`
+      );
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  useChance: async () => {
+    try {
+      const { data } = await connection.get(`/monopoly/game/chance`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  dismissChance: async ({ chanceId }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/chance/dismiss`, {
+        chanceId,
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  useTrivia: async () => {
+    try {
+      const { data } = await connection.get(`/monopoly/game/trivia`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getTrivia: async ({ queryKey }) => {
+    try {
+      const { triviaId } = queryKey[1];
+      const { data } = await connection.get(
+        `/monopoly/setting/trivia/${triviaId}`
+      );
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  answerTrivia: async ({ triviaId, correct }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/trivia/answer`, {
+        triviaId,correct
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  dismissTrivia: async ({ triviaId }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/trivia/dismiss`, {
+        triviaId,
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  nextTrivia: async ({ triviaId }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/trivia/next`, {
+        triviaId,
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  generateTriviaSession: async ({ player, category }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/trivia/session`, {
+        player,
+        category,
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  setTriviaCategoryMode: async ({ mode }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/trivia/category-mode`, {
+        mode
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  updateWinner: async ({ winner }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/winner`, {
+        winner
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  setBostaMode: async ({ mode }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/bosta-mode`, {
+        mode
+      });
       return data;
     } catch (error) {
       throw error;
