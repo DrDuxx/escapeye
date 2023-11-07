@@ -13,7 +13,7 @@ const StopGame = () => {
     cacheTime: 0,
     staleTime: 0,
     onSuccess: async (data) => {
-      if(data?.game?.winner){
+      if(data?.game?.winner !== null){
         setIsWinnerSet(true)
       }else{
         setIsWinnerSet(false)

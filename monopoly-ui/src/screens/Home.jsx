@@ -245,7 +245,7 @@ const Home = () => {
     cacheTime: 0,
     staleTime: 0,
     onSuccess: (data) => {
-      if (data?.game?.winner) {
+      if (data?.game?.winner !== null) {
         const winner = data?.game?.players[data?.game?.winner].name;
         navigate(`/winner/${winner}`);
         return;

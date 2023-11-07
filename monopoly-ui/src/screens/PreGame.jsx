@@ -68,7 +68,10 @@ const PreGame = () => {
     useMutation(GENERATE_GAME);
 
   const { data: runningGame, isLoading: runningGameLoading } =
-    useQuery(GET_GAME);
+    useQuery(GET_GAME,{
+      staleTime:0,
+      cacheTime:0,
+    });
 
   useEffect(() => {
     if (runningGame?.game?.id) {
