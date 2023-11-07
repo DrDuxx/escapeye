@@ -1099,7 +1099,7 @@ module.exports = {
       });
       if (!game) return res.status(200).json({ message: "no running game" });
 
-      const newTime = game.time + +time;
+      const newTime = game.time + (+time * 60);
       await MonopolyGame.update({ time: newTime }, { where: { id: game.id } });
 
       return res.status(200).json({ message: "ok" });
