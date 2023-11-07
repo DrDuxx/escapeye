@@ -64,7 +64,7 @@ module.exports = (app) => {
   MonopolyGameRouter.post('/setting/trivia', asyncWrapper(controller.addTrivia));
   MonopolyGameRouter.put('/setting/trivia/:triviaId', asyncWrapper(controller.editTrivia));
   MonopolyGameRouter.delete('/setting/trivia/:triviaId', asyncWrapper(controller.deleteTrivia));
-  MonopolyGameRouter.post('/setting/seed', asyncWrapper(controller.seedMonopolySettings));
+  MonopolyGameRouter.get('/setting/seed', asyncWrapper(controller.seedMonopolySettings));
 
   const DashboardRouter = require("express").Router();
   DashboardRouter.get("/", asyncWrapper(controller.getDashboardData));
