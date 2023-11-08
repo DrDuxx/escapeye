@@ -395,7 +395,7 @@ const Home = () => {
               textAlign: "center",
             }}
           >
-            <TypeWriter text={newLocationValue} delay={200} />
+            <TypeWriter text={newLocationValue} delay={100} />
           </div>
         </div>
       </div>
@@ -549,7 +549,6 @@ const Home = () => {
           flexWrap: "wrap-reverse",
           justifyContent: "center",
           backgroundColor: triviaCategoryColor,
-          // backgroundColor: "#121939",
         }}
       >
         <div
@@ -613,7 +612,7 @@ const Home = () => {
                   textAlign: "center",
                 }}
               >
-                {triviaData?.trivia?.answer}
+                <TypeWriter text={triviaData?.trivia?.answer} delay={100} />
               </div>
             </div>
           )}
