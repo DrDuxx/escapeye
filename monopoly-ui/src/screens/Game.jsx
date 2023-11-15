@@ -8,7 +8,7 @@ const Game = () => {
   const { data: runningGame, isLoading: runningGameLoading } =
     useQuery(GET_GAME, {
       onSuccess:(data)=>{
-        if(!data?.id){
+        if(!data?.game?.id){
           navigate('/ipad')
         }
       }
