@@ -444,7 +444,7 @@ const Home = () => {
             flexDirection: "column",
             rowGap: "6rem",
             alignItems: "center",
-            padding: "4rem",
+            padding: "2rem",
           }}
         >
           <div
@@ -470,7 +470,7 @@ const Home = () => {
           >
             {triviaCategories.map((zone) => {
               return (
-                <div style={{ flexBasis: "30%" }}>
+                <div>
                   <div
                     style={{ backgroundColor: zone.hex, borderRadius: "2rem" }}
                   >
@@ -479,7 +479,7 @@ const Home = () => {
                         "localServerIp"
                       )}:8080/images/${zone.name}.png`}
                       alt=""
-                      style={{ width: "100%", objectFit: "contain" }}
+                      style={{ height: "120px", objectFit: "contain" }}
                     />
                     <div
                       style={{
@@ -645,7 +645,7 @@ const Home = () => {
       style={{
         display: "flex",
         width: "100vw",
-        height: "100vh",
+        minHeight:'inherit',
         columnGap: ".5rem",
         rowGap: ".5rem",
         flexWrap: "wrap-reverse",
@@ -722,7 +722,8 @@ const Home = () => {
                       position: "absolute",
                       left: 0,
                       top: "35%",
-                      width: "50px",
+                      width: `${50 * getPlayerCardStyle(runningGame?.game?.players?.length)
+                        .fontScale}px`,
                       height: `${
                         3 *
                         getPlayerCardStyle(runningGame?.game?.players?.length)
@@ -736,7 +737,8 @@ const Home = () => {
                       position: "absolute",
                       left: 0,
                       top: "50%",
-                      width: "50px",
+                      width: `${50 * getPlayerCardStyle(runningGame?.game?.players?.length)
+                        .fontScale}px`,
                       height: `${
                         3 *
                         getPlayerCardStyle(runningGame?.game?.players?.length)

@@ -11,7 +11,9 @@ const Game = () => {
         if(!data?.game?.id){
           navigate('/ipad')
         }
-      }
+      },
+      staleTime:0,
+      cacheTime:0
     });
 
   return (

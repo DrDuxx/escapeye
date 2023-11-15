@@ -57,7 +57,6 @@ const Winner = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: "2rem",
             marginRight: "40%",
           }}
         >
@@ -79,7 +78,7 @@ const Winner = () => {
             src={`http://${localStorage.getItem(
               "localServerIp"
             )}:8080/images/mr-monopoly.png`}
-            style={{ width: "750px", objectFit: "contain" }}
+            style={{ width: "500px", objectFit: "contain" }}
             alt=""
           />
         </div>
