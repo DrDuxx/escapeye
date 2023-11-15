@@ -92,6 +92,7 @@ const Trivia = () => {
         padding: "2rem",
         height: "100%",
         backgroundColor: "#D32027",
+        minHeight:'inherit',
         position: "relative",
       }}
     >
@@ -154,7 +155,7 @@ const Trivia = () => {
               color: "white",
             }}
           >
-            <div>Question: {triviaData?.trivia?.question}</div>
+            <div style={{marginBottom:'1.5rem'}}>Question: {triviaData?.trivia?.question}</div>
             <div>Answer: {triviaData?.trivia?.answer}</div>
           </div>
           {!isLastTriviaAnswered ? (

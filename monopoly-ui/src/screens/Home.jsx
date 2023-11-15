@@ -66,8 +66,8 @@ const renderColorCard = (color, isMortage, isFirst = false) => {
     return (
       <div
         style={{
-          width: "70px",
-          height: "70px",
+          width: "40px",
+          height: "40px",
           border: "2px solid black",
           position: "relative",
           marginLeft: isFirst ? 0 : "-20px",
@@ -82,7 +82,7 @@ const renderColorCard = (color, isMortage, isFirst = false) => {
             "localServerIp"
           )}:8080/images/jail-icon.png`}
           alt=""
-          style={{ width: "66px", height: "44px" }}
+          style={{ width: "38px", height: "25px" }}
         />
       </div>
     );
@@ -91,8 +91,8 @@ const renderColorCard = (color, isMortage, isFirst = false) => {
     return (
       <div
         style={{
-          width: "70px",
-          height: "70px",
+          width: "40px",
+          height: "40px",
           border: "2px solid black",
           position: "relative",
           marginLeft: isFirst ? 0 : "-20px",
@@ -107,7 +107,7 @@ const renderColorCard = (color, isMortage, isFirst = false) => {
             "localServerIp"
           )}:8080/images/electricity.png`}
           alt=""
-          style={{ width: "46px", height: "60px" }}
+          style={{ width: "26px", height: "34px" }}
         />
       </div>
     );
@@ -115,8 +115,8 @@ const renderColorCard = (color, isMortage, isFirst = false) => {
   return (
     <div
       style={{
-        width: "70px",
-        height: "70px",
+        width: "40px",
+        height: "40px",
         border: "2px solid black",
         position: "relative",
         marginLeft: isFirst ? 0 : "-20px",
@@ -172,7 +172,7 @@ switch (players) {
   case 1:
   case 2:
   case 3:
-    return 1.5
+    return 1.25
   case 4:
     return 1
   case 5:
@@ -191,31 +191,36 @@ const getPlayerCardStyle = (players) => {
     return {
       fontScale: getScale(players),
       container: {
-        padding: "2rem",
+        padding: "1.5rem",
         display: "flex",
         flexDirection: "column",
-        rowGap: "3rem",
+        rowGap: "1rem",
       },
       symbol: {
         position: "absolute",
         right: 0,
         top: 0,
       },
+      colors:{
+        maxWidth: `calc(100% - ${130 * getScale(players)}px`,
+        rowGap:'.75rem'
+      }
     };
   }
   return {
     fontScale: getScale(players),
     container: {
       flexBasis: "100%",
-      padding: "2rem",
+      padding: "2rem 2rem 0 2rem",
       display: "flex",
       flexDirection: "column",
-      rowGap: "3rem",
+      rowGap: "2.5rem",
     },
     symbol: {
       flexBasis: "100%",
       display: "flex",
       justifyContent: "flex-end",
+      alignItems:'flex-end'
     },
   };
 };
@@ -382,9 +387,9 @@ const Home = () => {
             border: "6px solid white",
             display: "flex",
             flexDirection: "column",
-            rowGap: "6rem",
+            rowGap: "2rem",
             alignItems: "center",
-            padding: "4rem",
+            padding: "1rem",
           }}
         >
           <div
@@ -684,7 +689,7 @@ const Home = () => {
               display: "flex",
               position: "relative",
               flexWrap: "wrap",
-              minHeight: "50%",
+              height: runningGame?.game?.players?.length > 3?"calc(50vh - 0.75rem)":"calc(100vh - 1rem)",
             }}
           >
             <div
@@ -757,6 +762,7 @@ const Home = () => {
                   columnGap: "1rem",
                   flexWrap: "wrap",
                   rowGap: "1rem",
+                  ...getPlayerCardStyle(runningGame?.game?.players?.length).colors
                 }}
               >
                 {getColorsForPlayer(zone.index, runningGame)}
