@@ -167,10 +167,29 @@ const getColorsForPlayer = (player, game) => {
   );
 };
 
+const getScale = (players)=>{
+switch (players) {
+  case 1:
+  case 2:
+  case 3:
+    return 1.5
+  case 4:
+    return 1
+  case 5:
+    return 1
+  case 6:
+    return 1
+  case 7:
+    return 0.75
+  default:
+    break;
+}
+
+}
 const getPlayerCardStyle = (players) => {
   if (players > 3) {
     return {
-      fontScale: players > 5 ? 1 : 1.5,
+      fontScale: getScale(players),
       container: {
         padding: "2rem",
         display: "flex",
@@ -185,7 +204,7 @@ const getPlayerCardStyle = (players) => {
     };
   }
   return {
-    fontScale: 1.5,
+    fontScale: getScale(players),
     container: {
       flexBasis: "100%",
       padding: "2rem",
@@ -451,7 +470,7 @@ const Home = () => {
           >
             {triviaCategories.map((zone) => {
               return (
-                <div style={{ flexBasis: "25%" }}>
+                <div style={{ flexBasis: "30%" }}>
                   <div
                     style={{ backgroundColor: zone.hex, borderRadius: "2rem" }}
                   >
@@ -643,10 +662,10 @@ const Home = () => {
           left: "50%",
           transform: "translateX(-50%)",
           width: "400px",
-          padding: "1rem",
+          padding: ".5rem",
           backgroundColor: "black",
           color: "white",
-          fontSize: "2rem",
+          fontSize: "1rem",
           textAlign: "center",
           zIndex: 5,
         }}
