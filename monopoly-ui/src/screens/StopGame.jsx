@@ -4,11 +4,14 @@ import { GET_GAME, STOP_GAME, UPDATE_WINNER } from "../services/sharedQueries";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { ReactComponent as BackIcon } from "../assets/icons/back-icon.svg";
+import { useContext } from "react";
+import SongContext from "../context/SongContext";
 
 const StopGame = () => {
   const navigate = useNavigate();
   const [isWinnerSet, setIsWinnerSet] = useState(false);
   const [winner, setWinner] = useState(0);
+  const { stopSong } = useContext(SongContext);
 
   const { data: runningGame, refetch: refetchGameData } = useQuery(GET_GAME, {
     cacheTime: 0,
@@ -53,8 +56,9 @@ const StopGame = () => {
           color: "white",
         }}
       >
-        {isWinnerSet ? "Stop Game" : "Select Winner"}
+        {isWinnerSet ? "Game has ended" : "Select Winner"}
       </div>
+      {!isWinnerSet && 
       <BackIcon
         style={{
           position: "absolute",
@@ -65,18 +69,9 @@ const StopGame = () => {
           navigate("/game");
         }}
       />
+      }
       {isWinnerSet ? (
         <>
-          <div
-            style={{
-              color: "white",
-              fontSize: "20px",
-              fontWeight: 700,
-              textAlign: "center",
-            }}
-          >
-            this action is irreversible, are you sure you want to stop?
-          </div>
           <Button
             extraStyle={{
               marginBottom: "1rem",
@@ -87,6 +82,7 @@ const StopGame = () => {
             onClick={async () => {
               if (stopGameLoading) return;
               try {
+                stopSong()
                 await stopGame();
                 navigate("/pre-game");
               } catch (error) {
@@ -95,11 +91,21 @@ const StopGame = () => {
               }
             }}
           >
-            STOP
+            End and dismiss
           </Button>
         </>
       ) : (
         <>
+        <div
+            style={{
+              color: "white",
+              fontSize: "20px",
+              fontWeight: 700,
+              textAlign: "center",
+            }}
+          >
+            this action is irreversible, are you sure you want continue?
+          </div>
           <select
             style={{
               fontSize: "1rem",

@@ -5,19 +5,21 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import CountdownProvider from "./context/CountdownProvider";
 import getQueryClient from "./services/queryClient";
-import { QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
-
+import SongProvider from "./context/SongProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={getQueryClient()}>
-    <CountdownProvider minutes={localStorage.getItem("timeLeft") || 60}>
-    <BrowserRouter>
-      <App />
-      </BrowserRouter>
-    </CountdownProvider>
+      <CountdownProvider minutes={localStorage.getItem("timeLeft") || 60}>
+        <SongProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </SongProvider>
+      </CountdownProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

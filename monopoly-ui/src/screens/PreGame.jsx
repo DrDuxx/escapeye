@@ -5,6 +5,8 @@ import { GENERATE_GAME, GET_GAME } from "../services/sharedQueries";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import { useContext } from "react";
+import SongContext from "../context/SongContext";
 
 const getIcons = (fields) => {
   let icons = [1, 2, 3, 4, 5, 6, 7];
@@ -60,6 +62,7 @@ const removePlayer = (setFields, index) => {
 
 const PreGame = () => {
   const navigate = useNavigate();
+  const { playSong } = useContext(SongContext);
 
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
@@ -117,9 +120,9 @@ const PreGame = () => {
               addNewPlayer(setFields, fields);
             }}
             extraStyle={{marginBottom: "1rem",
-      width: "100%",
-      color: "black",
-      backgroundColor: "white"}}
+              width: "100%",
+              color: "black",
+              backgroundColor: "white"}}
           >
             Add Player
           </Button>
@@ -262,6 +265,8 @@ const PreGame = () => {
               time: fields.time,
               players: fields.players.map((zone, i) => ({ ...zone, index: i })),
             });
+            playSong();
+            document.documentElement.webkitRequestFullScreen();
             navigate("/game");
           } else {
             alert("Missing fields");
