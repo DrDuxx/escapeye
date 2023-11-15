@@ -10,6 +10,7 @@ import {
 } from "../services/sharedQueries";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import { ReactComponent as BackIcon } from "../assets/icons/back-icon.svg";
 
 const Trivia = () => {
   const navigate = useNavigate();
@@ -24,9 +25,11 @@ const Trivia = () => {
       staleTime: 0,
       onSuccess: (data) => {
         let trivias = data?.game?.trivias;
-        let limit = data?.settings?.filter((zone)=>zone.option_name==='trivia_questions')?.pop().option_value.data;
+        let limit = data?.settings
+          ?.filter((zone) => zone.option_name === "trivia_questions")
+          ?.pop().option_value.data;
         let triviaSessions = data?.game?.triviaSessions;
-        let [openSession] = triviaSessions.filter((zone)=>zone.isOpen);
+        let [openSession] = triviaSessions.filter((zone) => zone.isOpen);
         setRemaining(limit - openSession.questions);
         if (trivias.length > 0) {
           let lastTrivia = trivias[trivias.length - 1];
@@ -89,6 +92,7 @@ const Trivia = () => {
         padding: "2rem",
         height: "100%",
         backgroundColor: "#D32027",
+        position: "relative",
       }}
     >
       <div
@@ -101,19 +105,16 @@ const Trivia = () => {
       >
         Trivia
       </div>
-      <Button
-        extraStyle={{
-          marginBottom: "1rem",
-          width: "100%",
-          color: "black",
-          backgroundColor: "white",
+      <BackIcon
+        style={{
+          position: "absolute",
+          width: 25,
+          height: 25,
         }}
         onClick={() => {
           navigate("/game");
         }}
-      >
-        BACK
-      </Button>
+      />
 
       {!isLastTriviaActive ? (
         <Button
@@ -158,90 +159,6 @@ const Trivia = () => {
           </div>
           {!isLastTriviaAnswered ? (
             <>
-            <Button
-              extraStyle={{
-                marginBottom: "1rem",
-                width: "100%",
-                color: "black",
-                backgroundColor: "white",
-              }}
-              onClick={async () => {
-                if (
-                  runningGameLoading ||
-                  dismissTriviaLoading ||
-                  nextTirivaTriviaLoading ||
-                  answerTriviaLoading ||
-                  executeTriviaLoading ||
-                  triviaDataLoading
-                )
-                  return;
-                try {
-                  await answerTrivia({ triviaId: isLastTriviaActive, correct:true });
-                  await getRunningGame();
-                } catch (error) {
-                  alert("error:", error);
-                }
-              }}
-            >
-              Correct
-            </Button>
-            <Button
-              extraStyle={{
-                marginBottom: "1rem",
-                width: "100%",
-                color: "black",
-                backgroundColor: "white",
-              }}
-              onClick={async () => {
-                if (
-                  runningGameLoading ||
-                  dismissTriviaLoading ||
-                  nextTirivaTriviaLoading ||
-                  answerTriviaLoading ||
-                  executeTriviaLoading ||
-                  triviaDataLoading
-                )
-                  return;
-                try {
-                  await answerTrivia({ triviaId: isLastTriviaActive, correct:false });
-                  await getRunningGame();
-                } catch (error) {
-                  alert("error:", error);
-                }
-              }}
-            >
-              Incorrect
-            </Button>
-            </>
-          ) : (
-            <>
-              {remaining>0 ?<Button
-                extraStyle={{
-                  marginBottom: "1rem",
-                  width: "100%",
-                  color: "black",
-                  backgroundColor: "white",
-                }}
-                onClick={async () => {
-                  if (
-                    runningGameLoading ||
-                    dismissTriviaLoading ||
-                    nextTirivaTriviaLoading ||
-                    answerTriviaLoading ||
-                    executeTriviaLoading ||
-                    triviaDataLoading
-                  )
-                    return;
-                  try {
-                    await nextTiriva({ triviaId: isLastTriviaActive });
-                    getRunningGame()
-                  } catch (error) {
-                    alert("error:", error);
-                  }
-                }}
-              >
-                Next
-              </Button>:
               <Button
                 extraStyle={{
                   marginBottom: "1rem",
@@ -260,15 +177,108 @@ const Trivia = () => {
                   )
                     return;
                   try {
-                    await dismissTrivia({ triviaId: isLastTriviaActive });
-                    navigate("/game");
+                    await answerTrivia({
+                      triviaId: isLastTriviaActive,
+                      correct: true,
+                    });
+                    await getRunningGame();
                   } catch (error) {
                     alert("error:", error);
                   }
                 }}
               >
-                Dismiss
-              </Button>}
+                Correct
+              </Button>
+              <Button
+                extraStyle={{
+                  marginBottom: "1rem",
+                  width: "100%",
+                  color: "black",
+                  backgroundColor: "white",
+                }}
+                onClick={async () => {
+                  if (
+                    runningGameLoading ||
+                    dismissTriviaLoading ||
+                    nextTirivaTriviaLoading ||
+                    answerTriviaLoading ||
+                    executeTriviaLoading ||
+                    triviaDataLoading
+                  )
+                    return;
+                  try {
+                    await answerTrivia({
+                      triviaId: isLastTriviaActive,
+                      correct: false,
+                    });
+                    await getRunningGame();
+                  } catch (error) {
+                    alert("error:", error);
+                  }
+                }}
+              >
+                Incorrect
+              </Button>
+            </>
+          ) : (
+            <>
+              {remaining > 0 ? (
+                <Button
+                  extraStyle={{
+                    marginBottom: "1rem",
+                    width: "100%",
+                    color: "black",
+                    backgroundColor: "white",
+                  }}
+                  onClick={async () => {
+                    if (
+                      runningGameLoading ||
+                      dismissTriviaLoading ||
+                      nextTirivaTriviaLoading ||
+                      answerTriviaLoading ||
+                      executeTriviaLoading ||
+                      triviaDataLoading
+                    )
+                      return;
+                    try {
+                      await nextTiriva({ triviaId: isLastTriviaActive });
+                      getRunningGame();
+                    } catch (error) {
+                      alert("error:", error);
+                    }
+                  }}
+                >
+                  Next
+                </Button>
+              ) : (
+                <Button
+                  extraStyle={{
+                    marginBottom: "1rem",
+                    width: "100%",
+                    color: "black",
+                    backgroundColor: "white",
+                  }}
+                  onClick={async () => {
+                    if (
+                      runningGameLoading ||
+                      dismissTriviaLoading ||
+                      nextTirivaTriviaLoading ||
+                      answerTriviaLoading ||
+                      executeTriviaLoading ||
+                      triviaDataLoading
+                    )
+                      return;
+                    try {
+                      await dismissTrivia({ triviaId: isLastTriviaActive });
+                      navigate("/game");
+                    } catch (error) {
+                      alert("error:", error);
+                    }
+                  }}
+                >
+                  Dismiss
+                </Button>
+              )}
             </>
           )}
         </>

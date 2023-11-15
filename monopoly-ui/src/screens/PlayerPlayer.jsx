@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { GENERATE_TRANSACTION, GET_GAME } from "../services/sharedQueries";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { ReactComponent as BackIcon } from "../assets/icons/back-icon.svg";
 
 const PlayerPlayer = () => {
   const [fields, setFields] = useState({
@@ -35,23 +36,23 @@ const PlayerPlayer = () => {
         rowGap: "2rem",
         height:'100%',
         padding: "2rem",
-        backgroundColor:'#D32027'
+        backgroundColor:'#D32027',
+        position:'relative',
       }}
     >
       <div style={{ fontSize: "20px", textAlign: "center", fontWeight: "700", color:'white' }}>
         Player -&gt; Player
       </div>
-      <Button
-      extraStyle={{marginBottom: "1rem",
-      width: "100%",
-      color: "black",
-      backgroundColor: "white"}}
-        onClick={() => {
-          navigate("/game");
-        }}
-      >
-        BACK
-      </Button>
+      <BackIcon 
+    style={{
+        position:'absolute',
+        width:25,
+        height:25
+    }}
+    onClick={() => {
+        navigate("/game");
+    }}
+    />
       <div>
         <div style={{ marginBottom: ".5rem" ,color:'white'}}>From Player:</div>
         <select

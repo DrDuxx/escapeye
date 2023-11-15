@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import { GET_GAME, MORTAGE_COLOR } from "../services/sharedQueries";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { ReactComponent as BackIcon } from "../assets/icons/back-icon.svg";
 
 const getGroupedData = (data, fields) => {
   return data
@@ -45,6 +46,7 @@ const Mortage = () => {
         height: "100%",
         backgroundColor: "#D32027",
         minHeight: "inherit",
+        position: "relative",
       }}
     >
       <div
@@ -57,19 +59,16 @@ const Mortage = () => {
       >
         Mortage (Player -&gt; Bank)
       </div>
-      <Button
-        extraStyle={{
-          marginBottom: "1rem",
-          width: "100%",
-          color: "black",
-          backgroundColor: "white",
+      <BackIcon
+        style={{
+          position: "absolute",
+          width: 25,
+          height: 25,
         }}
         onClick={() => {
           navigate("/game");
         }}
-      >
-        BACK
-      </Button>
+      />
       <div>
         <div style={{ marginBottom: ".5rem", color: "white" }}>Player:</div>
         <select

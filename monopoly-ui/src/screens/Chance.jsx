@@ -11,6 +11,7 @@ import {
 } from "../services/sharedQueries";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import { ReactComponent as BackIcon } from "../assets/icons/back-icon.svg";
 
 const getGroupedData = (data, fields) => {
   return data
@@ -98,7 +99,9 @@ const Chance = () => {
         const direction = data?.direction;
         const amount = data?.amount;
         return (
-          <div style={{display:'flex', flexDirection:'column', rowGap:'1rem'}}>
+          <div
+            style={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}
+          >
             <div>
               <div style={{ marginBottom: ".5rem", color: "white" }}>
                 {direction === "pp" ? "From " : ""}Player:
@@ -189,11 +192,11 @@ const Chance = () => {
                   return;
                 }
                 try {
-                    await generateTransaction({
-                      amount,
-                      sign: direction === "bp" ? "Credit" : "Debit",
-                      player: +fields.fromPlayer,
-                    });
+                  await generateTransaction({
+                    amount,
+                    sign: direction === "bp" ? "Credit" : "Debit",
+                    player: +fields.fromPlayer,
+                  });
                   if (direction === "pp") {
                     await generateTransaction({
                       amount,
@@ -549,6 +552,7 @@ const Chance = () => {
         height: "100%",
         backgroundColor: "#D32027",
         minHeight: "inherit",
+        position: "relative",
       }}
     >
       <div
@@ -561,19 +565,17 @@ const Chance = () => {
       >
         Chance
       </div>
-      <Button
-        extraStyle={{
-          marginBottom: "1rem",
-          width: "100%",
-          color: "black",
-          backgroundColor: "white",
+
+      <BackIcon
+        style={{
+          position: "absolute",
+          width: 25,
+          height: 25,
         }}
         onClick={() => {
           navigate("/game");
         }}
-      >
-        BACK
-      </Button>
+      />
 
       {!isLastChanceActive ? (
         <Button

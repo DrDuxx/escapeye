@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { GENERATE_TRANSACTION, GET_GAME } from "../services/sharedQueries";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { ReactComponent as BackIcon } from "../assets/icons/back-icon.svg";
 
 const BankPlayer = () => {
   const [fields, setFields] = useState({
@@ -33,89 +34,241 @@ const BankPlayer = () => {
         margin: "auto",
         rowGap: "2rem",
         padding: "2rem",
-        height:'100%',
-        backgroundColor:'#D32027'
+        height: "100%",
+        backgroundColor: "#D32027",
+        position: "relative",
       }}
     >
-      <div style={{ fontSize: "20px", textAlign: "center", fontWeight: "700", color:'white' }}>
-        Bank -&gt; Player
-      </div>
-      <Button
-extraStyle={{marginBottom: "1rem",
-width: "100%",
-color: "black",
-backgroundColor: "white"}}        onClick={() => {
-          navigate("/game");
+      <div
+        style={{
+          fontSize: "20px",
+          textAlign: "center",
+          fontWeight: "700",
+          color: "white",
         }}
       >
-        BACK
-      </Button>
+        Bank -&gt; Player
+      </div>
+      <BackIcon
+        style={{
+          position: "absolute",
+          width: 25,
+          height: 25,
+        }}
+        onClick={() => {
+          navigate("/game");
+        }}
+      />
       <div>
-        <div style={{ marginBottom: ".5rem", color:'white' }}>Player:</div>
+        <div style={{ marginBottom: ".5rem", color: "white" }}>Player:</div>
         <select
           style={{
             fontSize: "1rem",
             padding: "1rem",
             borderRadius: "0.5rem",
             width: "100%",
-            outline:'none',
-            backgroundColor:'transparent',
-            color:'white',
-            borderColor:'white'
+            outline: "none",
+            backgroundColor: "transparent",
+            color: "white",
+            borderColor: "white",
           }}
           onChange={(e) => {
             setFields((prev) => ({ ...prev, player: e.target.value }));
           }}
           value={fields.player}
-
         >
           {runningGame?.game?.players?.map((zone) => {
-            return <option value={zone.index} style={{backgroundColor:'white', color:'black'}}>{zone.name}</option>;
+            return (
+              <option
+                value={zone.index}
+                style={{ backgroundColor: "white", color: "black" }}
+              >
+                {zone.name}
+              </option>
+            );
           })}
         </select>
       </div>
       <div>
-        <div style={{color:"white"}}>Amount:</div>
+        <div style={{ color: "white" }}>Amount:</div>
         <Input
           value={fields.amount}
           onChange={(e) => {
             setFields((prev) => ({ ...prev, amount: e.target.value }));
           }}
           type={"number"}
-          extraStyle={{ color: "white",backgroundColor:'transparent', width: "100%", outline:'none', borderColor:'white' }}
+          extraStyle={{
+            color: "white",
+            backgroundColor: "transparent",
+            width: "100%",
+            outline: "none",
+            borderColor: "white",
+          }}
         />
       </div>
-      <div style={{display:'flex', flexWrap:"wrap", columnGap:'1.5rem', rowGap:'1.5rem', alignItems:'center', justifyContent:'center'}}>
-      <div onClick={()=>{
-                    setFields((prev) => ({ ...prev, amount: runningGame?.settings?.filter((zone)=>zone.option_name === "go_bonus")[0].option_value.data }));
-      }} style={{padding:'1.5rem', borderRadius:'4rem',minWidth:'150px',textAlign:'center',fontSize:'24px', backgroundColor:'transparent', color:'white',border:'1px solid white'}}>Go Bonus (Go Icon)</div>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          columnGap: "1.5rem",
+          rowGap: "1.5rem",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          onClick={() => {
+            setFields((prev) => ({
+              ...prev,
+              amount: runningGame?.settings?.filter(
+                (zone) => zone.option_name === "go_bonus"
+              )[0].option_value.data,
+            }));
+          }}
+          style={{
+            padding: "1rem 1.5rem",
+            borderRadius: "4rem",
+            minWidth: "150px",
+            textAlign: "center",
+            fontSize: "20px",
+            backgroundColor: "transparent",
+            color: "white",
+            border: "1px solid white",
+            display:'flex',
+            justifyContent:'center',
+            alignItems:'center',
+            columnGap:'.5rem'
+          }}
+        >
+          Go Bonus <img
+                      src={`http://${localStorage.getItem(
+                        "localServerIp"
+                      )}:8080/images/goBonusIcon.png`}
+                      alt=""
+                      style={{ width: "24px", height: "24px" }}
+                    />
+        </div>
       </div>
-      <div style={{display:'flex', flexWrap:"wrap", columnGap:'1.5rem', rowGap:'1.5rem', alignItems:'center', justifyContent:'center'}}>
-      <div onClick={()=>{
-                    setFields((prev) => ({ ...prev, amount: 50 }));
-      }} style={{padding:'1.5rem', borderRadius:'4rem',minWidth:'150px',textAlign:'center',fontSize:'24px', backgroundColor:'transparent', color:'white',border:'1px solid white'}}>50</div>
-      <div onClick={()=>{
-                    setFields((prev) => ({ ...prev, amount: 100 }));
-      }} style={{padding:'1.5rem', borderRadius:'4rem',minWidth:'150px',textAlign:'center',fontSize:'24px', backgroundColor:'transparent', color:'white',border:'1px solid white'}}>100</div>
-      <div onClick={()=>{
-                    setFields((prev) => ({ ...prev, amount: 150 }));
-      }} style={{padding:'1.5rem', borderRadius:'4rem',minWidth:'150px',textAlign:'center',fontSize:'24px', backgroundColor:'transparent', color:'white',border:'1px solid white'}}>150</div>
-      <div onClick={()=>{
-                    setFields((prev) => ({ ...prev, amount: 200 }));
-      }} style={{padding:'1.5rem', borderRadius:'4rem',minWidth:'150px',textAlign:'center',fontSize:'24px', backgroundColor:'transparent', color:'white',border:'1px solid white'}}>200</div>
-      <div onClick={()=>{
-                    setFields((prev) => ({ ...prev, amount: 250 }));
-      }} style={{padding:'1.5rem', borderRadius:'4rem',minWidth:'150px',textAlign:'center',fontSize:'24px', backgroundColor:'transparent', color:'white',border:'1px solid white'}}>250</div>
-      <div onClick={()=>{
-                    setFields((prev) => ({ ...prev, amount: 300 }));
-      }} style={{padding:'1.5rem', borderRadius:'4rem',minWidth:'150px',textAlign:'center',fontSize:'24px', backgroundColor:'transparent', color:'white',border:'1px solid white'}}>300</div>
-
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          columnGap: "1.5rem",
+          rowGap: "1.5rem",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          onClick={() => {
+            setFields((prev) => ({ ...prev, amount: 50 }));
+          }}
+          style={{
+            padding: "1rem 1.5rem",
+            borderRadius: "4rem",
+            minWidth: "150px",
+            textAlign: "center",
+            fontSize: "20px",
+            backgroundColor: "transparent",
+            color: "white",
+            border: "1px solid white",
+          }}
+        >
+          50
+        </div>
+        <div
+          onClick={() => {
+            setFields((prev) => ({ ...prev, amount: 100 }));
+          }}
+          style={{
+            padding: "1rem 1.5rem",
+            borderRadius: "4rem",
+            minWidth: "150px",
+            textAlign: "center",
+            fontSize: "20px",
+            backgroundColor: "transparent",
+            color: "white",
+            border: "1px solid white",
+          }}
+        >
+          100
+        </div>
+        <div
+          onClick={() => {
+            setFields((prev) => ({ ...prev, amount: 150 }));
+          }}
+          style={{
+            padding: "1rem 1.5rem",
+            borderRadius: "4rem",
+            minWidth: "150px",
+            textAlign: "center",
+            fontSize: "20px",
+            backgroundColor: "transparent",
+            color: "white",
+            border: "1px solid white",
+          }}
+        >
+          150
+        </div>
+        <div
+          onClick={() => {
+            setFields((prev) => ({ ...prev, amount: 200 }));
+          }}
+          style={{
+            padding: "1rem 1.5rem",
+            borderRadius: "4rem",
+            minWidth: "150px",
+            textAlign: "center",
+            fontSize: "20px",
+            backgroundColor: "transparent",
+            color: "white",
+            border: "1px solid white",
+          }}
+        >
+          200
+        </div>
+        <div
+          onClick={() => {
+            setFields((prev) => ({ ...prev, amount: 250 }));
+          }}
+          style={{
+            padding: "1rem 1.5rem",
+            borderRadius: "4rem",
+            minWidth: "150px",
+            textAlign: "center",
+            fontSize: "20px",
+            backgroundColor: "transparent",
+            color: "white",
+            border: "1px solid white",
+          }}
+        >
+          250
+        </div>
+        <div
+          onClick={() => {
+            setFields((prev) => ({ ...prev, amount: 300 }));
+          }}
+          style={{
+            padding: "1rem 1.5rem",
+            borderRadius: "4rem",
+            minWidth: "150px",
+            textAlign: "center",
+            fontSize: "20px",
+            backgroundColor: "transparent",
+            color: "white",
+            border: "1px solid white",
+          }}
+        >
+          300
+        </div>
       </div>
       <Button
-      extraStyle={{marginBottom: "1rem",
-      width: "100%",
-      color: "black",
-      backgroundColor: "white"}}
+        extraStyle={{
+          marginBottom: "1rem",
+          width: "100%",
+          color: "black",
+          backgroundColor: "white",
+        }}
         onClick={async () => {
           if (isNaN(+fields.amount) || +fields.amount <= 0) return;
           if (runningGameLoading || generateTransactionLoading) return;

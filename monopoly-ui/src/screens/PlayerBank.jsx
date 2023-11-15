@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { GENERATE_TRANSACTION, GET_GAME } from "../services/sharedQueries";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { ReactComponent as BackIcon } from "../assets/icons/back-icon.svg";
 
 const PlayerBank = () => {
   const [fields, setFields] = useState({
@@ -35,6 +36,7 @@ const PlayerBank = () => {
         padding: "2rem",
         backgroundColor: "#D32027",
         height: "100%",
+        position: "relative",
       }}
     >
       <div
@@ -47,19 +49,16 @@ const PlayerBank = () => {
       >
         Player -&gt; Bank
       </div>
-      <Button
-        extraStyle={{
-          marginBottom: "1rem",
-          width: "100%",
-          color: "black",
-          backgroundColor: "white",
+      <BackIcon
+        style={{
+          position: "absolute",
+          width: 25,
+          height: 25,
         }}
         onClick={() => {
           navigate("/game");
         }}
-      >
-        BACK
-      </Button>
+      />
       <div>
         <div style={{ marginBottom: ".5rem", color: "white" }}>Player:</div>
         <select
@@ -128,17 +127,27 @@ const PlayerBank = () => {
             }));
           }}
           style={{
-            padding: "1.5rem",
+            padding: "1rem 1.5rem",
             borderRadius: "4rem",
             minWidth: "150px",
             textAlign: "center",
-            fontSize: "24px",
+            fontSize: "20px",
             backgroundColor: "transparent",
             color: "white",
             border: "1px solid white",
+            display:'flex',
+            justifyContent:'center',
+            alignItems:'center',
+            columnGap:'.5rem'
           }}
         >
-          Baalback Fee (Icon)
+          Baalback Fee <img
+                      src={`http://${localStorage.getItem(
+                        "localServerIp"
+                      )}:8080/images/baalbackFeeIcon.png`}
+                      alt=""
+                      style={{ width: "24px", height: "24px" }}
+                    />
         </div>
         <div
           onClick={() => {
@@ -150,17 +159,27 @@ const PlayerBank = () => {
             }));
           }}
           style={{
-            padding: "1.5rem",
+            padding: "1rem 1.5rem",
             borderRadius: "4rem",
             minWidth: "150px",
             textAlign: "center",
-            fontSize: "24px",
+            fontSize: "20px",
             backgroundColor: "transparent",
             color: "white",
             border: "1px solid white",
+            display:'flex',
+            justifyContent:'center',
+            alignItems:'center',
+            columnGap:'.5rem'
           }}
         >
-          Daman Fee (Icon)
+          Daman Fee <img
+                      src={`http://${localStorage.getItem(
+                        "localServerIp"
+                      )}:8080/images/damanFeeIcon.png`}
+                      alt=""
+                      style={{ width: "24px", height: "24px" }}
+                    />
         </div>
       </div>
       <div
@@ -178,11 +197,11 @@ const PlayerBank = () => {
             setFields((prev) => ({ ...prev, amount: 50 }));
           }}
           style={{
-            padding: "1.5rem",
+            padding: "1rem 1.5rem",
             borderRadius: "4rem",
             minWidth: "150px",
             textAlign: "center",
-            fontSize: "24px",
+            fontSize: "20px",
             backgroundColor: "transparent",
             color: "white",
             border: "1px solid white",
@@ -195,11 +214,11 @@ const PlayerBank = () => {
             setFields((prev) => ({ ...prev, amount: 100 }));
           }}
           style={{
-            padding: "1.5rem",
+            padding: "1rem 1.5rem",
             borderRadius: "4rem",
             minWidth: "150px",
             textAlign: "center",
-            fontSize: "24px",
+            fontSize: "20px",
             backgroundColor: "transparent",
             color: "white",
             border: "1px solid white",
@@ -212,11 +231,11 @@ const PlayerBank = () => {
             setFields((prev) => ({ ...prev, amount: 150 }));
           }}
           style={{
-            padding: "1.5rem",
+            padding: "1rem 1.5rem",
             borderRadius: "4rem",
             minWidth: "150px",
             textAlign: "center",
-            fontSize: "24px",
+            fontSize: "20px",
             backgroundColor: "transparent",
             color: "white",
             border: "1px solid white",
@@ -229,11 +248,11 @@ const PlayerBank = () => {
             setFields((prev) => ({ ...prev, amount: 200 }));
           }}
           style={{
-            padding: "1.5rem",
+            padding: "1rem 1.5rem",
             borderRadius: "4rem",
             minWidth: "150px",
             textAlign: "center",
-            fontSize: "24px",
+            fontSize: "20px",
             backgroundColor: "transparent",
             color: "white",
             border: "1px solid white",
@@ -246,11 +265,11 @@ const PlayerBank = () => {
             setFields((prev) => ({ ...prev, amount: 250 }));
           }}
           style={{
-            padding: "1.5rem",
+            padding: "1rem 1.5rem",
             borderRadius: "4rem",
             minWidth: "150px",
             textAlign: "center",
-            fontSize: "24px",
+            fontSize: "20px",
             backgroundColor: "transparent",
             color: "white",
             border: "1px solid white",
@@ -263,11 +282,11 @@ const PlayerBank = () => {
             setFields((prev) => ({ ...prev, amount: 300 }));
           }}
           style={{
-            padding: "1.5rem",
+            padding: "1rem 1.5rem",
             borderRadius: "4rem",
             minWidth: "150px",
             textAlign: "center",
-            fontSize: "24px",
+            fontSize: "20px",
             backgroundColor: "transparent",
             color: "white",
             border: "1px solid white",

@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import { EXCHANGE_COLOR, GET_GAME } from "../services/sharedQueries";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { ReactComponent as BackIcon } from "../assets/icons/back-icon.svg";
 
 const getGroupedData = (data, fields) => {
   return data
@@ -47,7 +48,8 @@ const ColorPlayer = () => {
         padding: "2rem",
         height: "100%",
         backgroundColor: "#D32027",
-        minHeight:'inherit'
+        minHeight: "inherit",
+        position: "relative",
       }}
     >
       <div
@@ -60,19 +62,16 @@ const ColorPlayer = () => {
       >
         Exchange Color Player -&gt; Player
       </div>
-      <Button
-        extraStyle={{
-          marginBottom: "1rem",
-          width: "100%",
-          color: "black",
-          backgroundColor: "white",
+      <BackIcon
+        style={{
+          position: "absolute",
+          width: 25,
+          height: 25,
         }}
         onClick={() => {
           navigate("/game");
         }}
-      >
-        BACK
-      </Button>
+      />
       <div>
         <div style={{ marginBottom: ".5rem", color: "white" }}>
           From Player:
@@ -156,11 +155,11 @@ const ColorPlayer = () => {
               if (key === "jail") {
                 return (
                   <div
-                  onClick={() => {
-                    if (value.filter((zone) => !zone.isMortage).length === 0)
-                      return;
-                    setFields((prev) => ({ ...prev, color: key }));
-                  }}
+                    onClick={() => {
+                      if (value.filter((zone) => !zone.isMortage).length === 0)
+                        return;
+                      setFields((prev) => ({ ...prev, color: key }));
+                    }}
                     style={{
                       width: "100px",
                       height: "100px",
@@ -170,34 +169,35 @@ const ColorPlayer = () => {
                       justifyContent: "center",
                       alignItems: "center",
                       backgroundColor: "white",
-                      opacity: value.filter((zone) => !zone.isMortage).length === 0
-                      ? ".5"
-                      : "1",
+                      opacity:
+                        value.filter((zone) => !zone.isMortage).length === 0
+                          ? ".5"
+                          : "1",
                     }}
                   >
                     <div style={{ position: "absolute", top: 5, right: 5 }}>
-                    {fields.color === key && (
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clip-path="url(#clip0_636_3084)">
-                          <path
-                            d="M0.256592 13.4867C0.256592 13.4867 4.09659 17.81 4.86326 19.576H8.16326C9.54659 15.3527 14.9199 5.27267 19.5273 1.73934C20.4806 0.512671 18.0839 0.00600377 16.1489 0.81867C13.2323 2.042 7.73226 11.392 6.70559 13.64C5.24893 14.0233 3.71226 11.1833 3.71093 11.1833L0.256592 13.4867Z"
-                            fill="black"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_636_3084">
-                            <rect width="20" height="20" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    )}
-                  </div>
+                      {fields.color === key && (
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g clip-path="url(#clip0_636_3084)">
+                            <path
+                              d="M0.256592 13.4867C0.256592 13.4867 4.09659 17.81 4.86326 19.576H8.16326C9.54659 15.3527 14.9199 5.27267 19.5273 1.73934C20.4806 0.512671 18.0839 0.00600377 16.1489 0.81867C13.2323 2.042 7.73226 11.392 6.70559 13.64C5.24893 14.0233 3.71226 11.1833 3.71093 11.1833L0.256592 13.4867Z"
+                              fill="black"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_636_3084">
+                              <rect width="20" height="20" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      )}
+                    </div>
                     <img
                       src={`http://${localStorage.getItem(
                         "localServerIp"
@@ -206,19 +206,19 @@ const ColorPlayer = () => {
                       style={{ width: "66px", height: "44px" }}
                     />
                     <div style={{ fontSize: "18px", fontWeight: "700" }}>
-                    {value.length}
-                  </div>
+                      {value.length}
+                    </div>
                   </div>
                 );
               }
               if (key === "edl") {
                 return (
                   <div
-                  onClick={() => {
-                    if (value.filter((zone) => !zone.isMortage).length === 0)
-                      return;
-                    setFields((prev) => ({ ...prev, color: key }));
-                  }}
+                    onClick={() => {
+                      if (value.filter((zone) => !zone.isMortage).length === 0)
+                        return;
+                      setFields((prev) => ({ ...prev, color: key }));
+                    }}
                     style={{
                       width: "100px",
                       height: "100px",
@@ -228,34 +228,35 @@ const ColorPlayer = () => {
                       justifyContent: "center",
                       alignItems: "center",
                       backgroundColor: "white",
-                      opacity: value.filter((zone) => !zone.isMortage).length === 0
-                      ? ".5"
-                      : "1",
+                      opacity:
+                        value.filter((zone) => !zone.isMortage).length === 0
+                          ? ".5"
+                          : "1",
                     }}
                   >
                     <div style={{ position: "absolute", top: 5, right: 5 }}>
-                    {fields.color === key && (
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clip-path="url(#clip0_636_3084)">
-                          <path
-                            d="M0.256592 13.4867C0.256592 13.4867 4.09659 17.81 4.86326 19.576H8.16326C9.54659 15.3527 14.9199 5.27267 19.5273 1.73934C20.4806 0.512671 18.0839 0.00600377 16.1489 0.81867C13.2323 2.042 7.73226 11.392 6.70559 13.64C5.24893 14.0233 3.71226 11.1833 3.71093 11.1833L0.256592 13.4867Z"
-                            fill="black"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_636_3084">
-                            <rect width="20" height="20" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    )}
-                  </div>
+                      {fields.color === key && (
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g clip-path="url(#clip0_636_3084)">
+                            <path
+                              d="M0.256592 13.4867C0.256592 13.4867 4.09659 17.81 4.86326 19.576H8.16326C9.54659 15.3527 14.9199 5.27267 19.5273 1.73934C20.4806 0.512671 18.0839 0.00600377 16.1489 0.81867C13.2323 2.042 7.73226 11.392 6.70559 13.64C5.24893 14.0233 3.71226 11.1833 3.71093 11.1833L0.256592 13.4867Z"
+                              fill="black"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_636_3084">
+                              <rect width="20" height="20" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      )}
+                    </div>
                     <img
                       src={`http://${localStorage.getItem(
                         "localServerIp"
@@ -264,8 +265,8 @@ const ColorPlayer = () => {
                       style={{ width: "46px", height: "60px" }}
                     />
                     <div style={{ fontSize: "18px", fontWeight: "700" }}>
-                    {value.length}
-                  </div>
+                      {value.length}
+                    </div>
                   </div>
                 );
               }

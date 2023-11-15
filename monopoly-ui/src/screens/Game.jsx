@@ -36,7 +36,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -52,7 +52,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -68,7 +68,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -84,7 +84,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -100,7 +100,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -116,7 +116,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -141,7 +141,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -157,7 +157,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -173,7 +173,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -189,7 +189,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -205,7 +205,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -221,7 +221,7 @@ const Game = () => {
           <Button
             extraStyle={{
               marginBottom: "1rem",
-              padding: "1.75rem",
+              padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
               color: "black",
@@ -238,7 +238,7 @@ const Game = () => {
       <Button
         extraStyle={{
           marginBottom: "1rem",
-          padding: "1.75rem",
+          padding: "1.25rem",
           fontSize: "16px",
           width: "100%",
           color: "#D32027",

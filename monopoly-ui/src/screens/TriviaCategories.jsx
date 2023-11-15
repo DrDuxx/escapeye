@@ -8,6 +8,7 @@ import {
   SET_TRIVIA_CATEGORY_MODE,
 } from "../services/sharedQueries";
 import { triviaCategories } from "../categories";
+import { ReactComponent as BackIcon } from "../assets/icons/back-icon.svg";
 
 const TriviaCategories = () => {
   const [fields, setFields] = useState({ player: 0 });
@@ -32,10 +33,10 @@ const TriviaCategories = () => {
         if (triviaSessions[triviaSessions?.length - 1]?.isOpen) {
           navigate("/trivia");
         } else {
-          await setTriviaCategoryMode({mode:true});
+          await setTriviaCategoryMode({ mode: true });
         }
-      }else{
-        await setTriviaCategoryMode({mode:true});
+      } else {
+        await setTriviaCategoryMode({ mode: true });
       }
     },
   });
@@ -51,6 +52,7 @@ const TriviaCategories = () => {
         height: "100%",
         backgroundColor: "#D32027",
         minHeight: "inherit",
+        position: "relative",
       }}
     >
       <div
@@ -63,20 +65,17 @@ const TriviaCategories = () => {
       >
         Trivia Categories
       </div>
-      <Button
-        extraStyle={{
-          marginBottom: "1rem",
-          width: "100%",
-          color: "black",
-          backgroundColor: "white",
+      <BackIcon
+        style={{
+          position: "absolute",
+          width: 25,
+          height: 25,
         }}
-        onClick={ async () => {
-            await setTriviaCategoryMode({mode:false});
+        onClick={async () => {
+          await setTriviaCategoryMode({mode:false});
           navigate("/game");
         }}
-      >
-        BACK
-      </Button>
+      />
       <div>
         <div style={{ marginBottom: ".5rem", color: "white" }}>Player:</div>
         <select

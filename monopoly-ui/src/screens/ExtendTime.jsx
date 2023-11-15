@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { EXTEND_TIME } from "../services/sharedQueries";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { ReactComponent as BackIcon } from "../assets/icons/back-icon.svg";
 
 const ExtendTime = () => {
   const [time, setTime] = useState("");
@@ -23,6 +24,7 @@ const ExtendTime = () => {
         height: "100%",
         minHeight: "inherit",
         backgroundColor: "#D32027",
+        position: "relative",
       }}
     >
       <div
@@ -35,19 +37,16 @@ const ExtendTime = () => {
       >
         Extend Time
       </div>
-      <Button
-        extraStyle={{
-          marginBottom: "1rem",
-          width: "100%",
-          color: "black",
-          backgroundColor: "white",
+      <BackIcon
+        style={{
+          position: "absolute",
+          width: 25,
+          height: 25,
         }}
         onClick={() => {
           navigate("/game");
         }}
-      >
-        BACK
-      </Button>
+      />
       <div>
         <div style={{ color: "white" }}>Additional Time (In minutes)</div>
         <Input
