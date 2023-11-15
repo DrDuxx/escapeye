@@ -6,7 +6,13 @@ import { useQuery } from "react-query";
 const Game = () => {
   const navigate = useNavigate();
   const { data: runningGame, isLoading: runningGameLoading } =
-    useQuery(GET_GAME);
+    useQuery(GET_GAME, {
+      onSuccess:(data)=>{
+        if(!data?.id){
+          navigate('/ipad')
+        }
+      }
+    });
 
   return (
     <div
