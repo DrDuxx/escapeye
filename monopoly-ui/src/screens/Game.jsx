@@ -5,16 +5,18 @@ import { useQuery } from "react-query";
 
 const Game = () => {
   const navigate = useNavigate();
-  const { data: runningGame, isLoading: runningGameLoading } =
-    useQuery(GET_GAME, {
-      onSuccess:(data)=>{
-        if(!data?.game?.id){
-          navigate('/ipad')
+  const { data: runningGame, isLoading: runningGameLoading } = useQuery(
+    GET_GAME,
+    {
+      onSuccess: (data) => {
+        if (!data?.game?.id) {
+          navigate("/ipad");
         }
       },
-      staleTime:0,
-      cacheTime:0
-    });
+      staleTime: 0,
+      cacheTime: 0,
+    }
+  );
 
   return (
     <div
@@ -136,6 +138,22 @@ const Game = () => {
           >
             Assign Color -&gt; Bank
           </Button>
+
+          <Button
+            extraStyle={{
+              marginBottom: "1rem",
+              padding: "1.25rem",
+              fontSize: "16px",
+              width: "100%",
+              color: "black",
+              background: "white",
+            }}
+            onClick={() => {
+              navigate("/extend-time");
+            }}
+          >
+            Extend Time
+          </Button>
         </div>
         <div
           style={{
@@ -160,6 +178,22 @@ const Game = () => {
             }}
           >
             Chance
+          </Button>
+
+          <Button
+            extraStyle={{
+              marginBottom: "1rem",
+              padding: "1.25rem",
+              fontSize: "16px",
+              width: "100%",
+              color: "black",
+              background: "white",
+            }}
+            onClick={() => {
+              navigate("/dare");
+            }}
+          >
+            Dare
           </Button>
 
           <Button
@@ -232,32 +266,17 @@ const Game = () => {
               padding: "1.25rem",
               fontSize: "16px",
               width: "100%",
-              color: "black",
+              color: "#D32027",
               background: "white",
             }}
             onClick={() => {
-              navigate("/extend-time");
+              navigate("/stop-game");
             }}
           >
-            Extend Time
+            Stop Game
           </Button>
         </div>
       </div>
-      <Button
-        extraStyle={{
-          marginBottom: "1rem",
-          padding: "1.25rem",
-          fontSize: "16px",
-          width: "100%",
-          color: "#D32027",
-          background: "white",
-        }}
-        onClick={() => {
-          navigate("/stop-game");
-        }}
-      >
-        Stop Game
-      </Button>
     </div>
   );
 };

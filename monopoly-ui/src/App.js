@@ -19,6 +19,7 @@ import ColorPlayerPlayer from "./screens/ColorPlayerPlayer";
 import Winner from "./screens/Winner";
 import TriviaCategories from "./screens/TriviaCategories";
 import Bosta from "./screens/Bosta";
+import Dare from "./screens/Dare";
 
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/color-player-player" element={<ColorPlayerPlayer />} />
         <Route path="/color-bank" element={<ColorBank />} />
         <Route path="/chance" element={<Chance />} />
+        <Route path="/dare" element={<Dare />} />
         <Route path="/trivia" element={<Trivia />} />
         <Route path="/trivia/category" element={<TriviaCategories />} />
         <Route path="/mortage" element={<Mortage />} />

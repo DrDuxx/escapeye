@@ -1,5 +1,10 @@
 import { useQuery } from "react-query";
-import { GET_CHANCE, GET_GAME, GET_TRIVIA } from "../services/sharedQueries";
+import {
+  GET_CHANCE,
+  GET_DARE,
+  GET_GAME,
+  GET_TRIVIA,
+} from "../services/sharedQueries";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import CountdownContext from "../context/CountdownContext";
@@ -167,25 +172,25 @@ const getColorsForPlayer = (player, game) => {
   );
 };
 
-const getScale = (players)=>{
-switch (players) {
-  case 1:
-  case 2:
-  case 3:
-    return 1.25
-  case 4:
-    return 1
-  case 5:
-    return 1
-  case 6:
-    return 1
-  case 7:
-    return 0.75
-  default:
-    break;
-}
+const getScale = (players) => {
+  switch (players) {
+    case 1:
+    case 2:
+    case 3:
+      return 1.25;
+    case 4:
+      return 1;
+    case 5:
+      return 1;
+    case 6:
+      return 1;
+    case 7:
+      return 0.75;
+    default:
+      break;
+  }
+};
 
-}
 const getPlayerCardStyle = (players) => {
   if (players > 3) {
     return {
@@ -201,10 +206,10 @@ const getPlayerCardStyle = (players) => {
         right: 0,
         top: 0,
       },
-      colors:{
+      colors: {
         maxWidth: `calc(100% - ${130 * getScale(players)}px`,
-        rowGap:'.75rem'
-      }
+        rowGap: ".75rem",
+      },
     };
   }
   return {
@@ -220,7 +225,7 @@ const getPlayerCardStyle = (players) => {
       flexBasis: "100%",
       display: "flex",
       justifyContent: "flex-end",
-      alignItems:'flex-end'
+      alignItems: "flex-end",
     },
   };
 };
@@ -228,7 +233,9 @@ const getPlayerCardStyle = (players) => {
 const Home = () => {
   const [chanceId, setChanceId] = useState("");
   const [triviaId, setTriviaId] = useState("");
+  const [dareId, setDareId] = useState("");
   const [isChanceActive, setIsChanceActive] = useState(false);
+  const [isDareActive, setIsDareActive] = useState(false);
   const [limitTrivia, setLimitTrivia] = useState(0);
   const [remainingTrivia, setRemainingTrivia] = useState(0);
   const [isTriviaCategory, setIsTriviaCategory] = useState(false);
@@ -248,6 +255,18 @@ const Home = () => {
       cacheTime: 0,
       onSuccess: (data) => {
         setIsChanceActive(true);
+      },
+    }
+  );
+
+  const { data: dareData, refetch: getDareData } = useQuery(
+    [GET_DARE, { dareId }],
+    {
+      enabled: false,
+      staleTime: 0,
+      cacheTime: 0,
+      onSuccess: (data) => {
+        setIsDareActive(true);
       },
     }
   );
@@ -305,7 +324,17 @@ const Home = () => {
       if (
         data?.game?.triviaSessions?.filter((zone) => zone.isOpen).length > 0
       ) {
-        setTriviaCategoryColor(triviaCategories.filter((zone)=>zone.name===data?.game?.triviaSessions[data?.game?.triviaSessions.length - 1].category).pop().hex);
+        setTriviaCategoryColor(
+          triviaCategories
+            .filter(
+              (zone) =>
+                zone.name ===
+                data?.game?.triviaSessions[
+                  data?.game?.triviaSessions.length - 1
+                ].category
+            )
+            .pop().hex
+        );
         setRemainingTrivia(
           data?.game?.triviaSessions[data?.game?.triviaSessions.length - 1]
             .questions
@@ -314,6 +343,7 @@ const Home = () => {
         setRemainingTrivia(0);
       }
       let chances = [...data?.game?.chances];
+      let dares = [...data?.game?.dares];
       let trivias = [...data?.game?.trivias];
       if (chances.length > 0) {
         if (!chances[chances.length - 1].isDismissed) {
@@ -321,6 +351,14 @@ const Home = () => {
         } else {
           setIsChanceActive(false);
           setChanceId("");
+        }
+      }
+      if (dares.length > 0) {
+        if (!dares[dares.length - 1].isDismissed) {
+          setDareId(dares[dares.length - 1].id);
+        } else {
+          setIsDareActive(false);
+          setDareId("");
         }
       }
       if (trivias.length > 0) {
@@ -348,6 +386,12 @@ const Home = () => {
   }, [chanceId, getChanceData]);
 
   useEffect(() => {
+    if (dareId) {
+      getDareData();
+    }
+  }, [dareId, getDareData]);
+
+  useEffect(() => {
     if (triviaId) {
       getTriviaData();
     }
@@ -357,12 +401,12 @@ const Home = () => {
   const hours = Math.floor((timeLeft % (3600 * 24)) / 3600);
   const minutes = Math.floor((timeLeft % 3600) / 60);
   const seconds = timeLeft % 60;
-  
+
   useEffect(() => {
     if (runningGame?.game) {
       const diff = moment().diff(runningGame?.game?.startedAt, "seconds");
-      const secToBeSet = runningGame?.game?.time - diff
-      resetCountdown(secToBeSet>0?secToBeSet:0);
+      const secToBeSet = runningGame?.game?.time - diff;
+      resetCountdown(secToBeSet > 0 ? secToBeSet : 0);
     }
   }, [resetCountdown, runningGame]);
 
@@ -492,7 +536,7 @@ const Home = () => {
                         color: "white",
                         textAlign: "center",
                         fontSize: "24px",
-                        textTransform:'capitalize'
+                        textTransform: "capitalize",
                       }}
                     >
                       {zone.name}
@@ -555,6 +599,57 @@ const Home = () => {
             }}
           >
             {chanceData?.chance?.action}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isDareActive) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          width: "100vw",
+          height: "100vh",
+          columnGap: ".25rem",
+          rowGap: ".25rem",
+          flexWrap: "wrap-reverse",
+          justifyContent: "center",
+          backgroundColor: "#3C4142",
+        }}
+      >
+        <div
+          style={{
+            margin: "2rem",
+            width: "100%",
+            border: "6px solid white",
+            display: "flex",
+            flexDirection: "column",
+            rowGap: "6rem",
+            alignItems: "center",
+            padding: "4rem",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "80px",
+              color: "white",
+              fontWeight: 700,
+              textAlign: "center",
+            }}
+          >
+            DARE
+          </div>
+          <div
+            style={{
+              fontSize: "27px",
+              color: "white",
+              fontWeight: 700,
+              textAlign: "center",
+            }}
+          >
+            {dareData?.dare?.action}
           </div>
         </div>
       </div>
@@ -650,7 +745,7 @@ const Home = () => {
       style={{
         display: "flex",
         width: "100vw",
-        minHeight:'inherit',
+        minHeight: "inherit",
         columnGap: ".5rem",
         rowGap: ".5rem",
         flexWrap: "wrap-reverse",
@@ -689,7 +784,10 @@ const Home = () => {
               display: "flex",
               position: "relative",
               flexWrap: "wrap",
-              height: runningGame?.game?.players?.length > 3?"calc(50vh - 0.75rem)":"calc(100vh - 1rem)",
+              height:
+                runningGame?.game?.players?.length > 3
+                  ? "calc(50vh - 0.75rem)"
+                  : "calc(100vh - 1rem)",
             }}
           >
             <div
@@ -727,8 +825,11 @@ const Home = () => {
                       position: "absolute",
                       left: 0,
                       top: "35%",
-                      width: `${50 * getPlayerCardStyle(runningGame?.game?.players?.length)
-                        .fontScale}px`,
+                      width: `${
+                        50 *
+                        getPlayerCardStyle(runningGame?.game?.players?.length)
+                          .fontScale
+                      }px`,
                       height: `${
                         3 *
                         getPlayerCardStyle(runningGame?.game?.players?.length)
@@ -742,8 +843,11 @@ const Home = () => {
                       position: "absolute",
                       left: 0,
                       top: "50%",
-                      width: `${50 * getPlayerCardStyle(runningGame?.game?.players?.length)
-                        .fontScale}px`,
+                      width: `${
+                        50 *
+                        getPlayerCardStyle(runningGame?.game?.players?.length)
+                          .fontScale
+                      }px`,
                       height: `${
                         3 *
                         getPlayerCardStyle(runningGame?.game?.players?.length)
@@ -762,7 +866,8 @@ const Home = () => {
                   columnGap: "1rem",
                   flexWrap: "wrap",
                   rowGap: "1rem",
-                  ...getPlayerCardStyle(runningGame?.game?.players?.length).colors
+                  ...getPlayerCardStyle(runningGame?.game?.players?.length)
+                    .colors,
                 }}
               >
                 {getColorsForPlayer(zone.index, runningGame)}

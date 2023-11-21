@@ -39,8 +39,10 @@ module.exports = (app) => {
   MonopolyGameRouter.post('/game/mortage', asyncWrapper(controller.mortageColor));
   MonopolyGameRouter.post('/game/unmortage', asyncWrapper(controller.unmortageColor));
   MonopolyGameRouter.get('/game/chance', asyncWrapper(controller.getGameChance));
-  MonopolyGameRouter.post('/game/bosta-mode', asyncWrapper(controller.setBostaMode));
   MonopolyGameRouter.post('/game/chance/dismiss', asyncWrapper(controller.dismissChance));
+  MonopolyGameRouter.get('/game/dare', asyncWrapper(controller.getGameDare));
+  MonopolyGameRouter.post('/game/dare/dismiss', asyncWrapper(controller.dismissDare));
+  MonopolyGameRouter.post('/game/bosta-mode', asyncWrapper(controller.setBostaMode));
   MonopolyGameRouter.get('/game/trivia', asyncWrapper(controller.getGameTrivia));
   MonopolyGameRouter.post('/game/trivia/session', asyncWrapper(controller.generateTriviaSession));
   MonopolyGameRouter.post('/game/trivia/category-mode', asyncWrapper(controller.setTriviaCategoryMode));
@@ -59,6 +61,11 @@ module.exports = (app) => {
   MonopolyGameRouter.post('/setting/chance', asyncWrapper(controller.addChance));
   MonopolyGameRouter.put('/setting/chance/:chanceId', asyncWrapper(controller.editChance));
   MonopolyGameRouter.delete('/setting/chance/:chanceId', asyncWrapper(controller.deleteChance));
+  MonopolyGameRouter.get('/setting/dare', asyncWrapper(controller.getDares));
+  MonopolyGameRouter.get('/setting/dare/:dareId', asyncWrapper(controller.getDare));
+  MonopolyGameRouter.post('/setting/dare', asyncWrapper(controller.addDare));
+  MonopolyGameRouter.put('/setting/dare/:dareId', asyncWrapper(controller.editDare));
+  MonopolyGameRouter.delete('/setting/dare/:dareId', asyncWrapper(controller.deleteDare));
   MonopolyGameRouter.get('/setting/trivia', asyncWrapper(controller.getTrivias));
   MonopolyGameRouter.get('/setting/trivia/:triviaId', asyncWrapper(controller.getTrivia));
   MonopolyGameRouter.post('/setting/trivia', asyncWrapper(controller.addTrivia));

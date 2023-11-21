@@ -50,6 +50,26 @@ const Monopoly = () => {
           marginTop: "1rem",
         }}
         onClick={() => {
+          navigate(`/admin/monopoly/dare`);
+        }}
+      >
+        Dare
+      </div>
+      <div
+        style={{
+          padding: "1rem 2rem",
+          flexBasis: "25%",
+          backgroundColor: "#fff",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: ".5rem",
+          cursor: "pointer",
+          color: "#000",
+          fontWeight: "700",
+          marginTop: "1rem",
+        }}
+        onClick={() => {
           navigate(`/admin/monopoly/trivia`);
         }}
       >

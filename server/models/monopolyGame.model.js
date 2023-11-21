@@ -26,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
       chances: {
         type: DataTypes.JSONB,
       },
+      dares: {
+        type: DataTypes.JSONB,
+      },
       trivias: {
         type: DataTypes.JSONB,
       },

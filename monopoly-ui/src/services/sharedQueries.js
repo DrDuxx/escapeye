@@ -16,8 +16,11 @@ export const UPDATE_WINNER = "UPDATE_WINNER";
 export const MORTAGE_COLOR = "MORTAGE_COLOR"; 
 export const UNMORTAGE_COLOR = "UNMORTAGE_COLOR"; 
 export const USE_CHANCE = "USE_CHANCE"; 
+export const USE_DARE = "USE_DARE"; 
 export const GET_CHANCE = "GET_CHANCE"; 
+export const GET_DARE = "GET_DARE"; 
 export const DISMISS_CHANCE = "DISMISS_CHANCE"; 
+export const DISMISS_DARE = "DISMISS_DARE"; 
 export const USE_TRIVIA = "USE_TRIVIA";
 export const GET_TRIVIA = "GET_TRIVIA";
 export const ANSWER_TRIVIA = "ANSWER_TRIVIA";
@@ -66,12 +69,24 @@ queryClient.setQueryDefaults(USE_CHANCE, {
   queryFn: api.useChance,
 });
 
+queryClient.setQueryDefaults(USE_DARE, {
+  queryFn: api.useDare,
+});
+
 queryClient.setQueryDefaults(GET_CHANCE, {
   queryFn: api.getChance,
 });
 
+queryClient.setQueryDefaults(GET_DARE, {
+  queryFn: api.getDare,
+});
+
 queryClient.setMutationDefaults(DISMISS_CHANCE,{
   mutationFn: api.dismissChance,
+})
+
+queryClient.setMutationDefaults(DISMISS_DARE,{
+  mutationFn: api.dismissDare,
 })
 
 queryClient.setQueryDefaults(USE_TRIVIA, {

@@ -421,6 +421,7 @@ module.exports = {
         colors: [],
         chances: [],
         trivias: [],
+        dares:[],
         triviaSessions: [],
         triviaCategoryMode: false,
         isRunning: true,
@@ -732,6 +733,88 @@ module.exports = {
 
       await MonopolyGame.update(
         { chances: chancesUsed },
+        { where: { id: game.id } }
+      );
+
+      return res.status(200).json({ message: "ok" });
+    } catch (error) {
+      next(error);
+    }
+  },
+  getGameDare: async (req, res, next) => {
+    try {
+      const { MonopolyGame, Dare } = require("../models");
+      const game = await MonopolyGame.findOne({
+        where: { isRunning: true },
+        raw: true,
+      });
+      if (!game) return res.status(200).json({ message: "no running game" });
+
+      const dares = await Dare.findAll({ raw: true });
+
+      const daresLeft = [
+        ...dares.filter(
+          (zone) =>
+            !game.dares.filter((zone2) => zone2.id === zone.id).length > 0
+        ),
+      ];
+      const daresUsed = [...game.dares];
+
+      if (daresLeft.length > 0) {
+        daresUsed.push({
+          id: daresLeft[Math.floor(Math.random() * daresLeft.length)].id,
+          isDismissed: false,
+        });
+      } else {
+        const [newDare] = daresUsed.splice(0, 1);
+        daresUsed.push({
+          id: newDare.id,
+          isDismissed: false,
+        });
+      }
+
+      await MonopolyGame.update(
+        { dares: daresUsed },
+        { where: { id: game.id } }
+      );
+
+      return res.status(200).json({ message: "ok" });
+    } catch (error) {
+      next(error);
+    }
+  },
+  dismissDare: async (req, res, next) => {
+    try {
+      const { MonopolyGame } = require("../models");
+      const { dareId } = req.body;
+      const game = await MonopolyGame.findOne({
+        where: { isRunning: true },
+        raw: true,
+      });
+      if (!game) return res.status(200).json({ message: "no running game" });
+
+      let daresUsed = [...game.dares];
+      if (
+        daresUsed.filter((zone) => zone.id === dareId && !zone.isDismissed)
+          .length < 1
+      ) {
+        return res
+          .status(200)
+          .json({ message: "dare doesn't exist or already been dismissed" });
+      }
+
+      daresUsed = daresUsed.map((zone) => {
+        if (zone.id === dareId && !zone.isDismissed) {
+          return {
+            ...zone,
+            isDismissed: true,
+          };
+        }
+        return zone;
+      });
+
+      await MonopolyGame.update(
+        { dares: daresUsed },
         { where: { id: game.id } }
       );
 
@@ -1246,6 +1329,56 @@ module.exports = {
       const { Chance } = require("../models");
       const { chanceId } = req.params;
       await Chance.destroy({ where: { id: chanceId } });
+      return res.status(200).json({ message: "ok" });
+    } catch (error) {
+      next(error);
+    }
+  },
+  getDare: async (req, res, next) => {
+    try {
+      const { Dare } = require("../models");
+      const { dareId } = req.params;
+      const dare = await Dare.findOne({ where: { id: dareId } });
+      return res.status(200).json({ dare });
+    } catch (error) {
+      next(error);
+    }
+  },
+  getDares: async (req, res, next) => {
+    try {
+      const { Dare } = require("../models");
+      const dares = await Dare.findAll();
+      return res.status(200).json({ dares });
+    } catch (error) {
+      next(error);
+    }
+  },
+  addDare: async (req, res, next) => {
+    try {
+      const { Dare } = require("../models");
+      const dareData = req.body;
+      await Dare.create({ ...dareData });
+      return res.status(200).json({ message: "ok" });
+    } catch (error) {
+      next(error);
+    }
+  },
+  editDare: async (req, res, next) => {
+    try {
+      const { Dare } = require("../models");
+      const { dareId } = req.params;
+      const dareData = req.body;
+      await Dare.update({ ...dareData }, { where: { id: dareId } });
+      return res.status(200).json({ message: "ok" });
+    } catch (error) {
+      next(error);
+    }
+  },
+  deleteDare: async (req, res, next) => {
+    try {
+      const { Dare } = require("../models");
+      const { dareId } = req.params;
+      await Dare.destroy({ where: { id: dareId } });
       return res.status(200).json({ message: "ok" });
     } catch (error) {
       next(error);

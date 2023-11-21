@@ -30,6 +30,9 @@ import MonopolyChanceAdd from "./screens/MonopolyChanceAdd";
 import MonopolyChanceEdit from "./screens/MonopolyChanceEdit";
 import MonopolyTriviaAdd from "./screens/MonopolyTriviaAdd";
 import MonopolyTriviaEdit from "./screens/MonopolyTriviaEdit";
+import MonopolyDare from "./screens/MonopolyDare";
+import MonopolyDareAdd from "./screens/MonopolyDareAdd";
+import MonopolyDareEdit from "./screens/MonopolyDareEdit";
 
 const App = () => {
   const roomNumber = localStorage.getItem('roomNumber') 
@@ -82,6 +85,9 @@ const App = () => {
         <Route path="/admin/monopoly/chance" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolyChance /></AdminLayout>} />
         <Route path="/admin/monopoly/chance/add" element={<AdminLayout backLink={"/admin/monopoly/chance"}><MonopolyChanceAdd /></AdminLayout>} />
         <Route path="/admin/monopoly/chance/edit/:chanceId" element={<AdminLayout backLink={"/admin/monopoly/chance"}><MonopolyChanceEdit /></AdminLayout>} />
+        <Route path="/admin/monopoly/dare" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolyDare /></AdminLayout>} />
+        <Route path="/admin/monopoly/dare/add" element={<AdminLayout backLink={"/admin/monopoly/dare"}><MonopolyDareAdd /></AdminLayout>} />
+        <Route path="/admin/monopoly/dare/edit/:dareId" element={<AdminLayout backLink={"/admin/monopoly/dare"}><MonopolyDareEdit /></AdminLayout>} />
         <Route path="/admin/monopoly/trivia" element={<AdminLayout backLink={"/admin/monopoly"}><MonopolyTrivia /></AdminLayout>} />
         <Route path="/admin/monopoly/trivia/add" element={<AdminLayout backLink={"/admin/monopoly/trivia"}><MonopolyTriviaAdd /></AdminLayout>} />
         <Route path="/admin/monopoly/trivia/edit/:triviaId" element={<AdminLayout backLink={"/admin/monopoly/trivia"}><MonopolyTriviaEdit /></AdminLayout>} />

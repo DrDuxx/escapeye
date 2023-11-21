@@ -106,9 +106,28 @@ export const api = {
       throw error;
     }
   },
+  getDare: async ({ queryKey }) => {
+    try {
+      const { dareId } = queryKey[1];
+      const { data } = await connection.get(
+        `/monopoly/setting/dare/${dareId}`
+      );
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
   useChance: async () => {
     try {
       const { data } = await connection.get(`/monopoly/game/chance`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  useDare: async () => {
+    try {
+      const { data } = await connection.get(`/monopoly/game/dare`);
       return data;
     } catch (error) {
       throw error;
@@ -118,6 +137,16 @@ export const api = {
     try {
       const { data } = await connection.post(`/monopoly/game/chance/dismiss`, {
         chanceId,
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  dismissDare: async ({ dareId }) => {
+    try {
+      const { data } = await connection.post(`/monopoly/game/dare/dismiss`, {
+        dareId,
       });
       return data;
     } catch (error) {

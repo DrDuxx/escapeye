@@ -38,6 +38,12 @@ export const ADD_MONOPOLY_CHANCE = "ADD_MONOPOLY_CHANCE"
 export const EDIT_MONOPOLY_CHANCE = "EDIT_MONOPOLY_CHANCE"
 export const DELETE_MONOPOLY_CHANCE = "DELETE_MONOPOLY_CHANCE"
 
+export const GET_MONOPOLY_DARES = "GET_MONOPOLY_DARES"
+export const GET_MONOPOLY_DARE = "GET_MONOPOLY_DARE"
+export const ADD_MONOPOLY_DARE = "ADD_MONOPOLY_DARE"
+export const EDIT_MONOPOLY_DARE = "EDIT_MONOPOLY_DARE"
+export const DELETE_MONOPOLY_DARE = "DELETE_MONOPOLY_DARE"
+
 export const GET_MONOPOLY_TRIVIAS = "GET_MONOPOLY_TRIVIAS"
 export const GET_MONOPOLY_TRIVIA = "GET_MONOPOLY_TRIVIA"
 export const ADD_MONOPOLY_TRIVIA = "ADD_MONOPOLY_TRIVIA"
@@ -156,6 +162,23 @@ queryClient.setMutationDefaults(EDIT_MONOPOLY_CHANCE, {
 });
 queryClient.setMutationDefaults(DELETE_MONOPOLY_CHANCE, {
   mutationFn: api.deleteMonopolyChance,
+});
+
+
+queryClient.setQueryDefaults(GET_MONOPOLY_DARES, {
+  queryFn: api.getMonopolyDares,
+});
+queryClient.setQueryDefaults(GET_MONOPOLY_DARE, {
+  queryFn: api.getMonopolyDare,
+});
+queryClient.setMutationDefaults(ADD_MONOPOLY_DARE, {
+  mutationFn: api.addMonopolyDare,
+});
+queryClient.setMutationDefaults(EDIT_MONOPOLY_DARE, {
+  mutationFn: api.editMonopolyDare,
+});
+queryClient.setMutationDefaults(DELETE_MONOPOLY_DARE, {
+  mutationFn: api.deleteMonopolyDare,
 });
 
 

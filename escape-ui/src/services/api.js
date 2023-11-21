@@ -251,6 +251,47 @@ export const api = {
       throw error;
     }
   },
+  getMonopolyDares: async () => {
+    try {
+      const { data } = await connection.get(`/monopoly/setting/dare`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getMonopolyDare: async ({queryKey}) => {
+    try {
+      const { dareId } = queryKey[1];
+      const { data } = await connection.get(`/monopoly/setting/dare/${dareId}`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  addMonopolyDare: async (addData) => {
+    try {
+      const { data } = await connection.post(`/monopoly/setting/dare`, addData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  editMonopolyDare: async ({dareId, editData}) => {
+    try {
+      const { data } = await connection.put(`/monopoly/setting/dare/${dareId}`, editData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  deleteMonopolyDare: async ({dareId}) => {
+    try {
+      const { data } = await connection.delete(`/monopoly/setting/dare/${dareId}`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
   getMonopolyTrivias: async () => {
     try {
       const { data } = await connection.get(`/monopoly/setting/trivia`);
