@@ -12,9 +12,11 @@ const ScoreRow = ({
   lastRow,
   empty
 }) => {
+  const rawHours = Math.floor((rawTime % (3600 * 24)) / 3600);
   const rawMinutes = Math.floor((rawTime % 3600) / 60);
   const rawSeconds = rawTime % 60;
   
+  const scoreHours = Math.floor((rawTime % (3600 * 24)) / 3600);
   const scoreMinutes = Math.floor((score % 3600) / 60);
   const scoreSeconds = score % 60;
 
@@ -85,9 +87,11 @@ const ScoreRow = ({
           borderCollapse: "collapse",
         }}
       >
-        {empty?'...':`${scoreMinutes
+        {empty?'...':`${scoreHours.toString()
+            .padStart(2, "0")}:${scoreMinutes
             .toString()
-            .padStart(2, "0")}:${scoreSeconds.toString().padStart(2, "0")}`}
+            .padStart(2, "0")}:
+            ${scoreSeconds.toString().padStart(2, "0")}`}
       </td>
       <td
         style={{
@@ -98,7 +102,8 @@ const ScoreRow = ({
           borderCollapse: "collapse",
         }}
       >
-        {empty?'...':`${rawMinutes
+        {empty?'...':`${rawHours.toString()
+            .padStart(2, "0")}:${rawMinutes
             .toString()
             .padStart(2, "0")}:${rawSeconds.toString().padStart(2, "0")}`}
       </td>
