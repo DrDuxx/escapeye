@@ -2,16 +2,26 @@ import { useMutation, useQuery } from "react-query";
 import {
   ADMIN_CHANGE_STATUS,
   ADMIN_GET_MONITOR,
+  DISMISS_ALERT,
+  POST_ALERT,
 } from "../services/sharedQueries";
 import { getRemainingTime } from "../getRemainingTime";
 import { useEffect, useState } from "react";
+import Input from "./Input";
 
 const GameMonitorComponent = ({ roomNumber }) => {
+  const [message, setMessage] = useState("");
   const { data: monitorData } = useQuery([ADMIN_GET_MONITOR, { roomNumber }], {
     refetchInterval: 1000,
     staleTime: 0,
     cacheTime: 0,
   });
+
+  const { mutateAsync: postAlert, isLoading: postAlertLoading } =
+    useMutation(POST_ALERT);
+
+  const { mutateAsync: dismissAlert, isLoading: dismissAlertLoading } =
+    useMutation(DISMISS_ALERT);
 
   const { mutateAsync: changeStatus, isLoading: changeStatusLoading } =
     useMutation(ADMIN_CHANGE_STATUS);
@@ -113,10 +123,73 @@ const GameMonitorComponent = ({ roomNumber }) => {
                   ?.join(",")
               : "None"}
           </div>
+          {
+            monitorData?.alert?.message?
+            <>
+            <div>
+              Message:{" "}
+              {monitorData?.alert?.message}
+              </div>
+              <div
+            style={{
+              padding: "1rem 2rem",
+              backgroundColor: "#fff",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: ".5rem",
+              cursor: "pointer",
+              color: "#000",
+              fontWeight: "700",
+              marginTop: "1rem",
+            }}
+            onClick={async () => {
+              if (dismissAlertLoading) return;
+              await dismissAlert({
+                roomNumber,
+              });
+            }}
+          >
+            Dismiss alert
+          </div>
+            </>
+              :
+            <>
+          <Input
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            textArea
+            extraStyle={{ marginBottom: ".5rem", resize: "vertical", minHeight:'60px' }}
+          />
           <div
             style={{
               padding: "1rem 2rem",
-              flexBasis: "25%",
+              backgroundColor: "#fff",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: ".5rem",
+              cursor: "pointer",
+              color: "#000",
+              fontWeight: "700",
+              marginTop: "1rem",
+            }}
+            onClick={async () => {
+              if (postAlertLoading) return;
+              await postAlert({
+                message,
+                roomNumber,
+              });
+              setMessage("")
+            }}
+          >
+            Post alert
+          </div>
+          </>
+          }
+          <div
+            style={{
+              padding: "1rem 2rem",
               backgroundColor: "#fff",
               display: "flex",
               justifyContent: "center",
@@ -140,7 +213,6 @@ const GameMonitorComponent = ({ roomNumber }) => {
           <div
             style={{
               padding: "1rem 2rem",
-              flexBasis: "25%",
               backgroundColor: "#FE6730",
               display: "flex",
               justifyContent: "center",

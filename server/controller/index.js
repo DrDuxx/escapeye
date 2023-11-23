@@ -147,10 +147,13 @@ module.exports = {
   },
   getMatch: async (req, res, next) => {
     try {
-      const { Match } = require("../models");
+      const { Match, Room, Alert } = require("../models");
       const { matchId } = req.params;
-      const match = await Match.findOne({ where: { id: matchId } });
-      return res.status(200).json(match);
+      const match = await Match.findOne({ where: { id: matchId }, raw:true });
+      const room = await Room.findOne({where:{id:match.roomId},raw:true})
+      const alert = await Alert.findOne({where:{roomNumber:room.number},raw:true})
+      const currentTime = moment().toString();
+      return res.status(200).json({...match,alert:alert?.message || "", currentTime});
     } catch (error) {
       next(error);
     }
@@ -272,12 +275,13 @@ module.exports = {
   },
   getMonitorData: async (req, res, next) => {
     try {
-      const { Room, Match, Lock } = require("../models");
+      const { Room, Match, Lock, Alert } = require("../models");
       const { roomNumber } = req.params;
       const room = await Room.findOne({ where: { number: roomNumber } });
       const match = await Match.findOne({
         where: { roomId: room.id, escaped: null },
       });
+      const alert = await Alert.findOne({where:{roomNumber}})
       let hints = [];
       let solutions = [];
       if (match?.hintsUsed?.length > 0) {
@@ -286,7 +290,48 @@ module.exports = {
       if (match?.solutionsUsed?.length > 0) {
         solutions = await Lock.findAll({ where: { id: match.solutionsUsed } });
       }
-      return res.status(200).json({ room, match, hints, solutions });
+      return res.status(200).json({ room, match, hints, solutions, alert });
+    } catch (error) {
+      next(error);
+    }
+  },
+  postAlert: async (req, res, next) => {
+    try {
+      const { Alert } = require("../models");
+      const { roomNumber } = req.params;
+      const { message} = req.body
+
+      const savedAlertForThisRoom = await Alert.findOne({where:{roomNumber}})
+      let alert;
+      if(savedAlertForThisRoom?.id){
+        alert = await Alert.update({message },{where:{roomNumber}});
+      }
+      alert = await Alert.create({ roomNumber, message });
+      return res.status(200).json({ alert });
+    } catch (error) {
+      next(error);
+    }
+  },
+  getAlert: async (req, res, next) => {
+    try {
+      const { Alert } = require("../models");
+      const { roomNumber } = req.params;
+
+      const alert = await Alert.findOne({where:{roomNumber}})
+      
+      return res.status(200).json({ alert });
+    } catch (error) {
+      next(error);
+    }
+  },
+  dismissAlert: async (req, res, next) => {
+    try {
+      const { Alert } = require("../models");
+      const { roomNumber } = req.params;
+
+      const alert = await Alert.update({message:"" },{where:{roomNumber}});
+      
+      return res.status(200).json({ alert });
     } catch (error) {
       next(error);
     }
@@ -392,7 +437,8 @@ module.exports = {
         --remainingColors[zone.hex];
       });
       const settings = await MonopolySetting.findAll();
-      return res.status(200).json({ game, settings, colors: remainingColors });
+      const currentTime = moment().toString();
+      return res.status(200).json({ currentTime, game, settings, colors: remainingColors });
     } catch (error) {
       next(error);
     }

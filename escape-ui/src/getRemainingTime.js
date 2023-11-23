@@ -1,6 +1,7 @@
 import moment from "moment";
 
 export const getRemainingTime = ({
+  currentTime,
   startTime,
   hintsUsed,
   solutionsUsed,
@@ -9,9 +10,9 @@ export const getRemainingTime = ({
   freeSolutionPenalty,
   hintPenalty,
   solutionPenalty,
-  navigate
+  navigate,
 }) => {
-  const diff = moment().diff(startTime, "seconds");
+  const diff = moment(currentTime).diff(startTime, "seconds");
   const safeTimeRemaining = totalTime - diff;
   const notFreeHints = hintsUsed.length - freeHintsNumber;
   const hintPenaltyTotal = notFreeHints > 0 ? notFreeHints * hintPenalty : 0;

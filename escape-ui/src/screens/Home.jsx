@@ -11,7 +11,7 @@ const Home = () => {
   const { resetCountdown } = useContext(CountdownContext);
   const roomId = localStorage.getItem("roomId");
 
-  const { playSong } = useContext(SongContext);
+  const { playSong, playAlert, stopAlert } = useContext(SongContext);
 
   const { data: roomData } = useQuery([GET_ROOM_DETAILS, { roomId }], {
     enabled: true,
@@ -39,6 +39,8 @@ const Home = () => {
         <Button
           onClick={async () => {
             playSong();
+            playAlert();
+            stopAlert();
             document.documentElement.webkitRequestFullScreen();
             if (addGameLoading) return;
             const game = await addGame({ roomId });

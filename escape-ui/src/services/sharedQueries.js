@@ -23,6 +23,8 @@ export const EDIT_GAME = "EDIT_GAME"
 
 export const ADMIN_GET_MONITOR = "ADMIN_GET_MONITOR"
 export const ADMIN_CHANGE_STATUS = "ADMIN_CHANGE_STATUS"
+export const POST_ALERT = "POST_ALERT"
+export const DISMISS_ALERT = "DISMISS_ALERT"
 export const GET_SCOREBOARD = "GET_SCOREBOARD"
 export const GET_ADMIN_SCOREBOARD = "GET_ADMIN_SCOREBOARD"
 
@@ -89,6 +91,14 @@ queryClient.setQueryDefaults(ADMIN_GET_MONITOR, {
 
 queryClient.setMutationDefaults(ADMIN_CHANGE_STATUS, {
   mutationFn: api.changeStatus,
+});
+
+queryClient.setMutationDefaults(POST_ALERT, {
+  mutationFn: api.postAlert,
+});
+
+queryClient.setMutationDefaults(DISMISS_ALERT, {
+  mutationFn: api.dismissAlert,
 });
 
 queryClient.setMutationDefaults(EDIT_GAME, {

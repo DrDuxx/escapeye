@@ -78,6 +78,9 @@ module.exports = (app) => {
   DashboardRouter.get("/scoreboard/:roomId", asyncWrapper(controller.getScoreBoard));
   DashboardRouter.get("/admin/scoreboard/:roomId", asyncWrapper(controller.getAdminScoreBoard));
   DashboardRouter.get("/monitor/:roomNumber", asyncWrapper(controller.getMonitorData));
+  DashboardRouter.post("/monitor/:roomNumber/alert", asyncWrapper(controller.postAlert));
+  DashboardRouter.get("/monitor/:roomNumber/alert", asyncWrapper(controller.getAlert));
+  DashboardRouter.delete("/monitor/:roomNumber/alert", asyncWrapper(controller.dismissAlert));
   
   const ConfigRouter = require("express").Router();
   ConfigRouter.get('/room-by-number/:roomNumber', asyncWrapper(controller.getRoomByRoomNumber))

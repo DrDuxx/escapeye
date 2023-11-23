@@ -404,7 +404,8 @@ const Home = () => {
 
   useEffect(() => {
     if (runningGame?.game) {
-      const diff = moment().diff(runningGame?.game?.startedAt, "seconds");
+      const currentTime = moment(runningGame?.currentTime)
+      const diff = currentTime.diff(runningGame?.game?.startedAt, "seconds");
       const secToBeSet = runningGame?.game?.time - diff;
       resetCountdown(secToBeSet > 0 ? secToBeSet : 0);
     }

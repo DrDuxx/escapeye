@@ -117,6 +117,24 @@ export const api = {
       throw error;
     }
   },
+  postAlert: async ({ roomNumber, message }) => {
+    try {
+      const { data } = await connection.post(`/dashboard/monitor/${roomNumber}/alert`, {
+        message,
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  dismissAlert: async ({ roomNumber }) => {
+    try {
+      const { data } = await connection.delete(`/dashboard/monitor/${roomNumber}/alert`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
   editGame: async ({ gameId, teamName, numberOfPlayers }) => {
     try {
       const { data } = await connection.put(`/match/${gameId}`, {
